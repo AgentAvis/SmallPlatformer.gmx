@@ -26,13 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>//tweakables
-//if global.Controls {
-//        with (oPlayer) { Speed = 2 JumpSpeed = 5.5 }
-//        global.Grav = .4
-//    } else {
-        with (oPlayer) { Speed = 2 JumpSpeed = 4 }
-        global.Grav = .15
-//    }
+with (oPlayer) { Speed = 2 JumpSpeed = 2.75 }
+global.Grav = .15
 HP = 2
 jumps = 20
 image_speed = 0.2
@@ -70,19 +65,33 @@ app = 0
 ScTime()
 
 //inputs
-up = keyboard_check_pressed(ord('W')) + keyboard_check_pressed(vk_space) + keyboard_check_pressed(vk_up)
-left = keyboard_check(ord('A')) + keyboard_check(vk_left)
-right = keyboard_check(ord('D')) + keyboard_check(vk_right)
+up = keyboard_check_pressed(ord('W')) + keyboard_check_pressed(vk_space)
+left = keyboard_check(ord('A'))
+right = keyboard_check(ord('D'))
 //vomiting
-if mouse_check_button(mb_left) and App {
+
+vomup = keyboard_check(vk_up)
+vomleft = keyboard_check(vk_left)
+vomright = keyboard_check(vk_right)
+vomdown = keyboard_check(vk_down)
+
+if vomup or vomleft or vomright or vomdown {
+
+var cusdir;
+if vomup    { cusdir = 90  }
+if vomdown  { cusdir = 270 }
+if vomright { cusdir = 0   }
+if vomleft  { cusdir = 180 }
+
+//if mouse_check_button(mb_left) and App {
     
     //knockback yo
-    motion_add_cus(global.Grav * .75,point_direction(x,y,mouse_x,mouse_y)+180)
-    
+    //motion_add_cus(global.Grav * .75,point_direction(x,y,mouse_x,mouse_y)+180)
+    motion_add_cus(global.Grav * .75,cusdir+180)
     
     repeat(ceil(random_range(2,7))) {
             with (instance_create(x,y,oBlood)) {
-                dir = point_direction(x,y,mouse_x,mouse_y) + random_range(-3,3)
+                dir = cusdir /*point_direction(x,y,mouse_x,mouse_y)*/ + random_range(-3,3)
                 spd = random_range(4,6)
                 hsp = lengthdir_x(spd,dir)
                 vsp = lengthdir_y(spd,dir)
@@ -94,7 +103,12 @@ if mouse_check_button(mb_left) and App {
             }
         }
     
+
+//}
 }
+
+
+
 //jumping
 
 if up and place_meeting(x,y + 2,oSolid) { 
@@ -131,19 +145,19 @@ if App { //this makes sure everything works the same even if time is slowed
 }
 
 //wall sliding
-if place_meeting(x+1,y,oSolid) and sign(vsp) = 1 {
+if place_meeting(x+2,y,oSolid) and sign(vsp) = 1 {
     if up {
         vsp = -JumpSpeed
         jumps -= 1
-        hsp = -Speed * 2
+        hsp = -Speed //* 2
     }
 vsp = vsp * .65 
 }
-if place_meeting(x-1,y,oSolid) and sign(vsp) = 1 {
+if place_meeting(x-2,y,oSolid) and sign(vsp) = 1 {
     if up {
         vsp = -JumpSpeed
         jumps -= 1
-        hsp = Speed * 2
+        hsp = Speed //* 2
     }
 vsp = vsp * .65 
 }
@@ -241,7 +255,7 @@ if mouse_check_button_pressed( mb_right ) {
     
 }
 
- 
+
 </string>
           </argument>
         </arguments>

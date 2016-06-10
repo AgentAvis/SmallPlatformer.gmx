@@ -34,9 +34,12 @@
     </sprites>
     <sprite>sprites\sBlastDoor</sprite>
     <sprite>sprites\sHook</sprite>
+    <sprite>sprites\sWallTile</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_world_1</background>
+    <background>background\background4</background>
+    <background>background\background3</background>
     <background>background\window</background>
     <background>background\Flall</background>
   </backgrounds>
@@ -64,10 +67,10 @@
       <object>objects\oSlimeBar</object>
     </objects>
     <objects name="CodeRelatedObjects">
-      <object>objects\oSolid</object>
       <object>objects\oBlood</object>
       <object>objects\oSplats</object>
       <object>objects\oDj</object>
+      <object>objects\oSolid</object>
     </objects>
     <objects name="Enemies">
       <object>objects\oStompable</object>
@@ -77,7 +80,8 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>
-    <room>rooms\room7</room>
+    <room>rooms\rTest</room>
+    <room>rooms\rTest2</room>
     <room>rooms\rTEMPtemplate</room>
   </rooms>
   <help>

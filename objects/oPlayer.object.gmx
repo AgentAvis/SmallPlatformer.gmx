@@ -38,6 +38,7 @@ vsp = 0
 hsp = 0
 App = false
 app = 0
+vtimerr = 0
 </string>
           </argument>
         </arguments>
@@ -105,6 +106,11 @@ if vomleft  { cusdir = 180 }
     
 
 //}
+vtimerr = 0
+} else {
+//kill spare vomit
+vtimerr ++;
+if vtimerr &gt; room_speed * 10 { with (oBlood) { instance_destroy() } vtimerr = 0 }
 }
 
 
@@ -145,21 +151,21 @@ if App { //this makes sure everything works the same even if time is slowed
 }
 
 //wall sliding
-if place_meeting(x+2,y,oSolid) and sign(vsp) = 1 {
+if place_meeting(x+2,y,oSolid) {//and sign(vsp) = 1 {
     if up {
         vsp = -JumpSpeed
         jumps -= 1
-        hsp = -Speed //* 2
+        hsp = -Speed * 2
     }
-vsp = vsp * .65 
+vsp = vsp * .9
 }
-if place_meeting(x-2,y,oSolid) and sign(vsp) = 1 {
+if place_meeting(x-2,y,oSolid) {//and sign(vsp) = 1 {
     if up {
         vsp = -JumpSpeed
         jumps -= 1
-        hsp = Speed //* 2
+        hsp = Speed * 1.5
     }
-vsp = vsp * .65 
+vsp = vsp * .9
 }
 
 //terminal velocity(s)  (These prevent things from getting too crazy)
@@ -255,6 +261,8 @@ if mouse_check_button_pressed( mb_right ) {
     
 }
 
+view_xview[0] = floor(x - view_wview/2)
+view_yview[0] = floor(y - view_hview/2)
 
 </string>
           </argument>
@@ -278,8 +286,8 @@ if mouse_check_button_pressed( mb_right ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
-
+            <string>//draw_self()
+draw_sprite_ext(sprite_index,image_index,floor(x),floor(y),image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 if global.debug {
     
     draw_set_colour(c_aqua);

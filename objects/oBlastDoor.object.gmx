@@ -58,14 +58,14 @@ if x &gt; ox { x -= 1 } if x &lt; ox { x += 1 }
 if y &gt; oy { y -= 1 } if y &lt; oy { y += 1 } 
 
 } else {
-
-var dx, dy;
-dx = ox + lengthdir_x(8,image_angle+270)
-dy = oy + lengthdir_y(8,image_angle+270)
-
-if x &gt; dx { x -= 1 } if x &lt; dx { x += 1 }
-if y &gt; dy { y -= 1 } if y &lt; dy { y += 1 } 
-
+    
+    var dx, dy;
+    dx = ox + lengthdir_x(8,image_angle+270)
+    dy = oy + lengthdir_y(8,image_angle+270)
+    
+    if x &gt; dx { x -= 1 } if x &lt; dx { x += 1 }
+    if y &gt; dy { y -= 1 } if y &lt; dy { y += 1 } 
+    
 }
 </string>
           </argument>

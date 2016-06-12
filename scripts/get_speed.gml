@@ -1,1 +1,1 @@
-return hsp + vsp;
+return abs(hsp + vsp);

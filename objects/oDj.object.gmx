@@ -32,6 +32,12 @@ global.Controls = true
 
 //tweakables
 
+globalvar blue;
+blue = c_blue //just used so i can reference color variables for vomit easily
+globalvar yellow;
+yellow = c_yellow
+globalvar green;
+green = c_green
 
 global.time = 1
 
@@ -80,10 +86,10 @@ surface_reset_target();
 
 }
 
-if keyboard_check_pressed(ord('U')) { global.time = get_integer("Set The default Time value",1) }
 
+if keyboard_check_pressed(ord('U')) { global.time = get_integer("Set timescale(TIME-SLOWING IS CURRENTLY BROKEN) ",1) }
 
-if keyboard_check_pressed(ord('J')) { global.Controls = !global.Controls Sw = true }
+//if keyboard_check_pressed(ord('J')) { global.Controls = !global.Controls Sw = true } //this is trash
 
 if Sw {
     if global.Controls {

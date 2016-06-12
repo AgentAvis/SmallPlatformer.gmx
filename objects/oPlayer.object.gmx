@@ -32,13 +32,20 @@ HP = 2
 jumps = 20
 image_speed = 0.2
 
+sprite_index2 = sNothing
+image_speed2 = .2
+image_index2 = 0
+
 //init
-ojumps = jumps
-vsp = 0
-hsp = 0
-App = false
-app = 0
-vtimerr = 0
+ojumps = jumps //trash this is trash
+vsp = 0 //custon vspeed
+hsp = 0 //custom hspeed
+App = false //used for slo-mo basically
+app = 0 //timerr used to count if its time for me to do things
+vtimerr = 0 //timerr untill i can vomit
+percent = 0 //percent of vomit i have in my gut
+lastside = 0 //last side i slid on, should be disabled
+num = 0 //used for animating the SECOND drawn sprite
 </string>
           </argument>
         </arguments>
@@ -65,10 +72,21 @@ vtimerr = 0
 
 ScTime()
 
+//cheats
+if keyboard_check_pressed(ord('T')) and global.debug { x = mouse_x y = mouse_y }
+
+//make sure there isn't too much goo
+
+//if instance_number(oBlood) &gt; 10 { with instance_nearest(x,y,oBlood) {instance_destroy()} } //commented because it wasn't working ??
+
+//make sure no cheating happens
+if percent &gt; 1 { percent = 1 }
+
 //inputs
 up = keyboard_check_pressed(ord('W')) + keyboard_check_pressed(vk_space)
 left = keyboard_check(ord('A'))
 right = keyboard_check(ord('D'))
+down = keyboard_check(ord('S'))
 //vomiting
 
 vomup = keyboard_check(vk_up)
@@ -76,50 +94,45 @@ vomleft = keyboard_check(vk_left)
 vomright = keyboard_check(vk_right)
 vomdown = keyboard_check(vk_down)
 
-if vomup or vomleft or vomright or vomdown {
-
-var cusdir;
-if vomup    { cusdir = 90  }
-if vomdown  { cusdir = 270 }
-if vomright { cusdir = 0   }
-if vomleft  { cusdir = 180 }
-
-//if mouse_check_button(mb_left) and App {
+if (vomup or vomleft or vomright or vomdown) and percent &gt; 0 {
     
-    //knockback yo
-    //motion_add_cus(global.Grav * .75,point_direction(x,y,mouse_x,mouse_y)+180)
-    motion_add_cus(global.Grav * .75,cusdir+180)
+    percent -= .005;
     
-    repeat(ceil(random_range(2,7))) {
-            with (instance_create(x,y,oBlood)) {
-                dir = cusdir /*point_direction(x,y,mouse_x,mouse_y)*/ + random_range(-3,3)
-                spd = random_range(4,6)
-                hsp = lengthdir_x(spd,dir)
-                vsp = lengthdir_y(spd,dir)
-                
-                image_blend = make_colour_rgb(random_range(90,120),random_range(151,255),79) //181
-                
-                image_alpha = random_range(.6,1.5)
-                if image_alpha &gt; 1 { image_alpha = 1 }
+    var cusdir;
+    if vomup    { cusdir = 90  }
+    if vomdown  { cusdir = 270 }
+    if vomright { cusdir = 0   }
+    if vomleft  { cusdir = 180 }
+    
+    //if mouse_check_button(mb_left) and App {
+        
+        //knockback yo
+        //motion_add_cus(global.Grav * .75,point_direction(x,y,mouse_x,mouse_y)+180)
+        motion_add_cus(global.Grav * .75,cusdir+180)
+        
+        repeat(ceil(random_range(2,7))) {
+                with (instance_create(x,y,oBlood)) {
+                    dir = cusdir /*point_direction(x,y,mouse_x,mouse_y)*/ + random_range(-3,3)
+                    spd = random_range(4,6)
+                    hsp = lengthdir_x(spd,dir)
+                    vsp = lengthdir_y(spd,dir)
+                    
+                    //image_blend = make_colour_rgb(random_range(90,120),random_range(151,255),79) //181
+                    image_blend = make_colour_rgb(random_range(100,130),random_range(156,196),random_range(200,255)) //181
+                    //c = blue
+                    
+                    image_alpha = random_range(.6,1.5)
+                    if image_alpha &gt; 1 { image_alpha = 1 }
+                }
             }
-        }
+        
     
-
-//}
-vtimerr = 0
+    //}
+    vtimerr = 0
 } else {
-//kill spare vomit
-vtimerr ++;
-if vtimerr &gt; room_speed * 10 { with (oBlood) { instance_destroy() } vtimerr = 0 }
-}
-
-
-
-//jumping
-
-if up and place_meeting(x,y + 2,oSolid) { 
-    vsp = -JumpSpeed
-    jumps -= 1
+    //kill spare vomit
+    vtimerr ++;
+    if vtimerr &gt; room_speed * 10 { with (oBlood) { instance_destroy() } vtimerr = 0 }
 }
 
 //autojump when you land on something
@@ -150,22 +163,32 @@ if App { //this makes sure everything works the same even if time is slowed
     }
 }
 
-//wall sliding
-if place_meeting(x+2,y,oSolid) {//and sign(vsp) = 1 {
-    if up {
-        vsp = -JumpSpeed
-        jumps -= 1
-        hsp = -Speed * 2
+if !collision_line(x+2,y,x+2,y+6,oSolid,true,true) and !down {
+    //wall sliding
+    if place_meeting(x+2,y,oSolid) {//and sign(vsp) != 1 {
+        if up and vsp != 0 {
+            vsp = -JumpSpeed
+            jumps -= 1
+            hsp = -Speed * 2
+        }
+    lastside = 0
+    vsp = vsp * .91
     }
-vsp = vsp * .9
+    if place_meeting(x-2,y,oSolid) {//and sign(vsp) != 1 {
+        if up and vsp != 0 {
+            vsp = -JumpSpeed
+            jumps -= 1
+            hsp = Speed * 1.5
+        }
+    lastside = 1
+    vsp = vsp * .91
+    }
 }
-if place_meeting(x-2,y,oSolid) {//and sign(vsp) = 1 {
-    if up {
-        vsp = -JumpSpeed
-        jumps -= 1
-        hsp = Speed * 1.5
-    }
-vsp = vsp * .9
+
+//jumping
+if up and place_meeting(x,y + 2,oSolid) { 
+    vsp = -JumpSpeed
+    jumps -= 1
 }
 
 //terminal velocity(s)  (These prevent things from getting too crazy)
@@ -269,6 +292,38 @@ view_yview[0] = floor(y - view_hview/2)
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//draw the blank bar
+rmh = view_hview[0] * 3.2
+rmw = view_wview[0] * 3
+draw_set_colour(c_black);
+draw_rectangle(0,rmh,rmw,rmh-16,false)
+//draw the fullness bar
+//calculate length of it
+length = percent * rmw
+draw_set_colour(c_green);
+draw_rectangle(0,rmh,0+length,rmh-16,false)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -287,8 +342,13 @@ view_yview[0] = floor(y - view_hview/2)
           <argument>
             <kind>1</kind>
             <string>//draw_self()
+
+//draw the base sprite and animation (image_index, sprite_index,etc)
 draw_sprite_ext(sprite_index,image_index,floor(x),floor(y),image_xscale,image_yscale,image_angle,image_blend,image_alpha)
+
 if global.debug {
+
+    draw_line(x,y,x,y+6)
     
     draw_set_colour(c_aqua);
     //vv true center of player

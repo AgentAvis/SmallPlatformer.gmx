@@ -35,6 +35,8 @@
     <sprite>sprites\sBlastDoor</sprite>
     <sprite>sprites\sHook</sprite>
     <sprite>sprites\sWallTile</sprite>
+    <sprite>sprites\sRefil</sprite>
+    <sprite>sprites\sNothing</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_world_1</background>
@@ -51,7 +53,10 @@
     <script>scripts\ScClear.gml</script>
     <script>scripts\ScTime.gml</script>
     <script>scripts\MachineCreate.gml</script>
+    <script>scripts\move_bounce_cus.gml</script>
     <script>scripts\get_speed.gml</script>
+    <script>scripts\ScAnim.gml</script>
+    <script>scripts\draw_sprite_ext_simp.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\oPlayer</object>
@@ -76,7 +81,9 @@
       <object>objects\oStompable</object>
       <object>objects\oBaloon</object>
       <object>objects\oSlime</object>
+      <object>objects\oRefil</object>
     </objects>
+    <object>objects\oMentor</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>

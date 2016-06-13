@@ -46,6 +46,9 @@ global.Grav = 0.15
 //BloodSurface
 surf = surface_create(room_width,room_height)
 
+//Just adding some test sound
+audio_play_sound(sMusic_theme1, 1, true);
+
 </string>
           </argument>
         </arguments>

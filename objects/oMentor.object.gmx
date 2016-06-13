@@ -59,9 +59,9 @@ image_index2 = 0
 
 image_speed = .2
 
-draw_sprite_ext_simp(spr_player_run,1)
-draw_sprite_ext_simp(spr_baloon,1)
-draw_sprite_ext_simp(sHook,1)
+draw_sprite_ext_simp(sMentor_body,1)
+draw_sprite_ext_simp(sMentor_eyesNormal,1)
+draw_sprite_ext_simp(sMentor_mouthClosed,1)
 </string>
           </argument>
         </arguments>

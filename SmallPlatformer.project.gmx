@@ -4,7 +4,18 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sounds name="Music">
+      <sound>sound\sMusic_theme1</sound>
+    </sounds>
+    <sounds name="Sounds">
+      <sounds name="Player">
+        <sound>sound\sPlayer_death1</sound>
+        <sound>sound\sPlayer_jump1</sound>
+        <sound>sound\sPlayer_land1</sound>
+      </sounds>
+    </sounds>
+  </sounds>
   <sprites name="sprites">
     <sprites name="Player">
       <sprite>sprites\spr_player_run</sprite>
@@ -37,6 +48,16 @@
     <sprite>sprites\sWallTile</sprite>
     <sprite>sprites\sRefil</sprite>
     <sprite>sprites\sNothing</sprite>
+    <sprites name="Characters">
+      <sprites name="Mentor">
+        <sprite>sprites\sMentor_body</sprite>
+        <sprite>sprites\sMentor_eyesNormal</sprite>
+        <sprite>sprites\sMentor_eyesBig</sprite>
+        <sprite>sprites\sMentor_mouthNormal</sprite>
+        <sprite>sprites\sMentor_mouthClosed</sprite>
+        <sprite>sprites\sMentor_mouthBig</sprite>
+      </sprites>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_world_1</background>
@@ -44,6 +65,7 @@
     <background>background\background3</background>
     <background>background\window</background>
     <background>background\Flall</background>
+    <background>background\bg_nightSky</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">

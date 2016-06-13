@@ -173,6 +173,7 @@ if !collision_line(x+2,y,x+2,y+6,oSolid,true,true) and !down {
             vsp = -JumpSpeed
             jumps -= 1
             hsp = -Speed * 2
+            audio_play_sound(sPlayer_jump1, 1, false);
         }
     lastside = 0
     vsp = vsp * .91
@@ -182,6 +183,7 @@ if !collision_line(x+2,y,x+2,y+6,oSolid,true,true) and !down {
             vsp = -JumpSpeed
             jumps -= 1
             hsp = Speed * 1.5
+            audio_play_sound(sPlayer_jump1, 1, false);
         }
     lastside = 1
     vsp = vsp * .91
@@ -322,7 +324,9 @@ view_yview[0] = floor(y - view_hview/2)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw the blank bar
+            <string>//moved to oDJ's draw GUI
+/*
+//draw the blank bar
 rmh = view_hview[0] * 3.2
 rmw = view_wview[0] * 3
 draw_set_colour(c_black);

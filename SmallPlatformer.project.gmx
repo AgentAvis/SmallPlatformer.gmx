@@ -3,6 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="4" name="datafiles"/>
   <NewExtensions/>
   <sounds name="sound">
     <sounds name="Music">
@@ -69,6 +70,10 @@
     <background>background\window</background>
     <background>background\Flall</background>
     <background>background\bg_nightSky</background>
+    <background>background\bStars1</background>
+    <background>background\bStars2</background>
+    <background>background\bStars3</background>
+    <background>background\bStars4</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">

@@ -47,7 +47,7 @@ global.Grav = 0.15
 surf = surface_create(room_width,room_height)
 
 //Just adding some test sound
-audio_play_sound(sMusic_theme1, 1, true);
+//audio_play_sound(sMusic_theme1, 1, true);
 
 </string>
           </argument>
@@ -105,6 +105,65 @@ if Sw {
     Sw = false
 }
 
+if instance_exists(oPlayer) {
+    background_x[4] += oPlayer.hsp / 1.5
+    background_y[4] += oPlayer.vsp / 1.5
+    
+    background_x[3] += oPlayer.hsp / 3
+    background_y[3] += oPlayer.vsp / 3
+    
+    background_x[2] += oPlayer.hsp / 6
+    background_y[2] += oPlayer.vsp / 6
+    
+    background_x[1] += oPlayer.hsp / 12
+    background_y[1] += oPlayer.vsp / 12
+    
+    background_x[0] += oPlayer.hsp / 1
+    background_y[0] += oPlayer.vsp / 1
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///all game gui
+if instance_exists(oPlayer) {
+    
+    //draw the blank bar
+    rmh = view_hview[0] * 3.2
+    rmw = view_wview[0] * 3
+    if oPlayer.percent != 0 {
+        draw_set_colour(c_black);
+        draw_rectangle(0,rmh,rmw,rmh-16,false)
+        //draw the fullness bar
+        //calculate length of it
+        length = oPlayer.percent * rmw
+        draw_set_colour(c_green);
+        draw_rectangle(0,rmh,0+length,rmh-16,false)
+    }
+
+    
+    
+    
+    
+}
 </string>
           </argument>
         </arguments>

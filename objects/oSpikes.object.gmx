@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>MachineCreate()
+
 </string>
           </argument>
         </arguments>
@@ -52,11 +53,11 @@
 
 if state = true {
 
-image_index = 0
+if y &gt; oy { y -= 1 }
 
 } else {
-
-image_index = 1
+if image_angle = 0
+if y &lt; oy + 6 { y += 1 }
 
 }
 </string>

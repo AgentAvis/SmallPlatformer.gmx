@@ -280,6 +280,7 @@ if HP &lt;= 0 {
             if image_alpha &gt; 1 { image_alpha = 1 }
         }
     }
+    instance_create(x - 180, y - 125, oDeathText)
     instance_destroy()
 }
 

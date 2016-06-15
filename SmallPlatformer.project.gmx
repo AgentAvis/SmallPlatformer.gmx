@@ -37,8 +37,6 @@
       <sprite>sprites\sSpikes</sprite>
       <sprite>sprites\sDoor</sprite>
       <sprite>sprites\sWall</sprite>
-      <sprite>sprites\spr_platform_middle</sprite>
-      <sprite>sprites\spr_platform_end</sprite>
     </sprites>
     <sprites name="Sprites you shouldnt be seeing">
       <sprite>sprites\sSlimeBar</sprite>
@@ -47,6 +45,8 @@
     <sprite>sprites\sBlastDoor</sprite>
     <sprite>sprites\sHook</sprite>
     <sprite>sprites\sWallTile</sprite>
+    <sprite>sprites\sSlideyWall</sprite>
+    <sprite>sprites\sSlideyWallBase</sprite>
     <sprite>sprites\sRefil</sprite>
     <sprite>sprites\sNothing</sprite>
     <sprites name="Characters">
@@ -62,6 +62,10 @@
     <sprites name="UI">
       <sprite>sprites\sDeathText</sprite>
     </sprites>
+    <sprite>sprites\sOutline1</sprite>
+    <sprite>sprites\sOutline2</sprite>
+    <sprite>sprites\sOutline3</sprite>
+    <sprite>sprites\sBrickTile</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_world_1</background>
@@ -95,10 +99,8 @@
       <object>objects\oBlastDoor</object>
       <object>objects\oButton</object>
       <object>objects\oDoor</object>
-      <object>objects\oPlatform_end</object>
       <object>objects\oWall</object>
-      <object>objects\oPlatform_mid</object>
-      <object>objects\oRoomWall</object>
+      <object>objects\oWall2</object>
       <object>objects\oSlimeBar</object>
     </objects>
     <objects name="CodeRelatedObjects">
@@ -116,6 +118,7 @@
     <object>objects\oMentor</object>
     <objects name="UI">
       <object>objects\oDeathText</object>
+      <object>objects\oDialog</object>
     </objects>
   </objects>
   <rooms name="rooms">

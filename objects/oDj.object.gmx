@@ -47,8 +47,8 @@ global.Grav = 0.15
 surf = surface_create(room_width,room_height)
 
 //Just adding some test sound
-//audio_play_sound(sMusic_theme1, 1, true);
-
+audio_play_sound(sMusic_theme1, 1, true);
+global.tile = true
 </string>
           </argument>
         </arguments>
@@ -106,20 +106,23 @@ if Sw {
 }
 
 if instance_exists(oPlayer) {
-    background_x[4] += oPlayer.hsp / 1.5
-    background_y[4] += oPlayer.vsp / 1.5
+
+    var s = 1; //s = movement scale
+
+    //background_x[4] += oPlayer.hsp / (s)
+    //background_y[4] += oPlayer.vsp / (s)
     
-    background_x[3] += oPlayer.hsp / 3
-    background_y[3] += oPlayer.vsp / 3
+    background_x[3] += oPlayer.hsp / (s*2) //smallest stars
+    background_y[3] += oPlayer.vsp / (s*2)
     
-    background_x[2] += oPlayer.hsp / 6
-    background_y[2] += oPlayer.vsp / 6
+    background_x[2] += oPlayer.hsp / (s*4) //second biggest
+    background_y[2] += oPlayer.vsp / (s*4)
     
-    background_x[1] += oPlayer.hsp / 12
-    background_y[1] += oPlayer.vsp / 12
+    background_x[1] += oPlayer.hsp / (s*48) //biggest stars
+    background_y[1] += oPlayer.vsp / (s*48)
     
-    background_x[0] += oPlayer.hsp / 1
-    background_y[0] += oPlayer.vsp / 1
+    background_x[0] += oPlayer.hsp / (1) //backround
+    background_y[0] += oPlayer.vsp / (1)
 }
 </string>
           </argument>

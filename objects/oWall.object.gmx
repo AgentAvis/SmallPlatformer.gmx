@@ -8,6 +8,79 @@
   <parentName>oSolid</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if image_xscale != 1 {
+    var i = 0;
+    for (i = 0; i &lt; image_xscale; i += 1){
+       instance_create(x+(8*i),y,object_index )
+    }
+}
+if image_yscale != 1 {
+    var i = 0;
+    for (i = 0; i &lt; image_yscale; i += 1){
+       instance_create(x,y+(8*i),object_index)
+    }
+}
+
+image_xscale = 1
+image_yscale = 1
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if global.tile {    
+    var count = 0;
+    var d = 8;
+    nUp = place_meeting(x,y-d,object_index);
+    nDown = place_meeting(x,y+d,object_index);
+    nRight = place_meeting(x+d,y,object_index);
+    nLeft = place_meeting(x-d,y,object_index);
+    
+    if(nUp) count += 1;
+    if(nRight) count += 2;
+    if(nDown) count += 4;
+    if(nLeft) count += 8;
+    image_index = count;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -26,9 +99,11 @@
           <argument>
             <kind>1</kind>
             <string>if image_xscale = 1 and image_yscale = 1 {
+}
 
 draw_self()
-
+draw_sprite(sOutline3,image_index,x,y)
+/*
 } else {
 
 

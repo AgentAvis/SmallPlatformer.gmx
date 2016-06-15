@@ -166,27 +166,35 @@ if App { //this makes sure everything works the same even if time is slowed
     }
 }
 
-if !collision_line(x+2,y,x+2,y+6,oSolid,true,true) and !down {
+if !collision_line(x-1,y+4,x-1,y+8,oSolid,true,true) and !down {
     //wall sliding
-    if place_meeting(x+2,y,oSolid) {//and sign(vsp) != 1 {
-        if up and vsp != 0 {
+    
+    slide1 = instance_place(x+2,y,oSolid)
+    slide2 = instance_place(x-2,y,oSolid)
+     
+    if instance_exists(slide1) {//and sign(vsp) != 1 {
+        if up and vsp != 0 and slide1.object_index != oWall2 {
             vsp = -JumpSpeed
             jumps -= 1
             hsp = -Speed * 2
             audio_play_sound(sPlayer_jump1, 1, false);
+            lastside = 0
+            vsp = vsp * .91
         }
-    lastside = 0
-    vsp = vsp * .91
+    //lastside = 0
+    //vsp = vsp * .91
     }
-    if place_meeting(x-2,y,oSolid) {//and sign(vsp) != 1 {
-        if up and vsp != 0 {
+    if instance_exists(slide2) {//and sign(vsp) != 1 {
+        if up and vsp != 0 and slide2.object_index != oWall2 {
             vsp = -JumpSpeed
             jumps -= 1
             hsp = Speed * 1.5
             audio_play_sound(sPlayer_jump1, 1, false);
+            lastside = 0
+            vsp = vsp * .91
         }
-    lastside = 1
-    vsp = vsp * .91
+    //lastside = 1
+    //vsp = vsp * .91
     }
 }
 
@@ -361,11 +369,13 @@ draw_rectangle(0,rmh,0+length,rmh-16,false)
             <string>//draw_self()
 
 //draw the base sprite and animation (image_index, sprite_index,etc)
+//draw_sprite_ext(sprite_index,image_index,floor(x),floor(y),image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 draw_sprite_ext(sprite_index,image_index,floor(x),floor(y),image_xscale,image_yscale,image_angle,image_blend,image_alpha)
+
 
 if global.debug {
 
-    draw_line(x,y,x,y+6)
+    draw_line(x-1,y+4,x-1,y+8)
     
     draw_set_colour(c_aqua);
     //vv true center of player

@@ -7,9 +7,9 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>4</bbox_left>
-  <bbox_right>18</bbox_right>
-  <bbox_top>5</bbox_top>
+  <bbox_left>3</bbox_left>
+  <bbox_right>20</bbox_right>
+  <bbox_top>1</bbox_top>
   <bbox_bottom>23</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
@@ -21,6 +21,5 @@
   <height>24</height>
   <frames>
     <frame index="0">images\sDoor_0.png</frame>
-    <frame index="1">images\sDoor_1.png</frame>
   </frames>
 </sprite>

@@ -45,7 +45,6 @@
     <sprite>sprites\sBlastDoor</sprite>
     <sprite>sprites\sHook</sprite>
     <sprite>sprites\sWallTile</sprite>
-    <sprite>sprites\sSlideyWall</sprite>
     <sprite>sprites\sSlideyWallBase</sprite>
     <sprite>sprites\sRefil</sprite>
     <sprite>sprites\sNothing</sprite>
@@ -66,6 +65,7 @@
     <sprite>sprites\sOutline2</sprite>
     <sprite>sprites\sOutline3</sprite>
     <sprite>sprites\sBrickTile</sprite>
+    <sprite>sprites\sSlideyWall</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_world_1</background>
@@ -78,6 +78,8 @@
     <background>background\bStars2</background>
     <background>background\bStars3</background>
     <background>background\bStars4</background>
+    <background>background\bTile1</background>
+    <background>background\bTile2</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -91,9 +93,21 @@
     <script>scripts\get_speed.gml</script>
     <script>scripts\ScAnim.gml</script>
     <script>scripts\draw_sprite_ext_simp.gml</script>
+    <script>scripts\draw_text_outlined.gml</script>
+    <script>scripts\GridSnap.gml</script>
+    <script>scripts\mouse_over.gml</script>
+    <script>scripts\mouse_over_gui.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\Font0</font>
+  </fonts>
   <objects name="objects">
+    <objects name="Editor">
+      <object>objects\oEditor</object>
+      <object>objects\oBrickSelect</object>
+    </objects>
     <object>objects\oPlayer</object>
+    <object>objects\oClone</object>
     <objects name="LevelRelated">
       <object>objects\oSpikes</object>
       <object>objects\oBlastDoor</object>
@@ -117,15 +131,20 @@
     </objects>
     <object>objects\oMentor</object>
     <objects name="UI">
+      <object>objects\oCam</object>
       <object>objects\oDeathText</object>
       <object>objects\oDialog</object>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>
+    <room>rooms\rMenu</room>
+    <room>rooms\rEditor</room>
     <room>rooms\rTest</room>
+    <room>rooms\rTestBackround</room>
     <room>rooms\rTest2</room>
     <room>rooms\rTEMPtemplate</room>
+    <room>rooms\rChooseSave</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -30,16 +30,6 @@ image_speed2 = .2
 sprite_index2 = spr_baloon
 
 
-
-//bobbing animation
-//tweakable
-    bobDelay = 20
-    amountOfBob = 5
-//changed by step function
-    yBobUp = false
-    amountOfBobDy = amountOfBob
-    bobDelayDy = bobDelay
-
 //init
 num = 0 
 image_index2 = 0
@@ -69,7 +59,15 @@ time = 0 //used for bobbing up and down
             <kind>1</kind>
             <string>if random(120) &lt; 1 { talking = !talking }
 
-
+if talking {
+    
+    
+    
+    
+    
+    
+    
+}
 
 /*
 if(yBobUp)

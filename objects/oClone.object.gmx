@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>//tweakables
-with (oPlayer) { Speed = 2 JumpSpeed = 2.75 }
+with (self) { Speed = 2 JumpSpeed = 2.75 }
 global.Grav = .15
 HP = 2
 jumps = 20
@@ -306,6 +306,7 @@ if mouse_check_button_pressed( mb_right ) {
     }
     
 }
+
 </string>
           </argument>
         </arguments>

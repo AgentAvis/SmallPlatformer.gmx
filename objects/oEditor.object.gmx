@@ -29,8 +29,14 @@
 ypos = view_yview[0]
 xlen = view_wview[0]
 ylen = view_hview[0]
-sel = false
-col1 = false
+canplace = false      //can i place blocks, or is the player hovering over the tile menu
+sel = false           //what kindof block is selected (if any?)
+block = false         //what block are we placing
+col1 = false          //is the player hovering over the first button
+col2 = false          //is the player hovering over the second button
+SpawnPointcol = false //is the player spawn point placer thing selected ?
+col3 = false          //is the player hovering over the spikes button
+
 </string>
           </argument>
         </arguments>
@@ -53,18 +59,83 @@ col1 = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if col1 and mouse_check_button_pressed(mb_left) {
+            <string>image_xscale = 1
+image_yscale = 1
 
-sel = oBrickSelect
+var block;
+//if sel = oWallSelect { block = oWall }
+//if sel = oWall2Select { block = oWall2 }
+//if sel = oPlayerSpawnPointSelect { block = oPlayerSpawnPoint }
 
+if col1 and mouse_check_button_pressed(mb_left) {
+    sel = oWallSelect
+}
+if col2 and mouse_check_button_pressed(mb_left) {
+    sel = oWall2Select
+    block = oWall2
+}
+if SpawnPointcol and mouse_check_button_pressed(mb_left) {
+    sel = oPlayerSpawnPointSelect
+    block = oPlayerSpawnPoint
+}
+if col3 and mouse_check_button_pressed(mb_left) {
+    sel = oSpikesSelect
+    block = oSpikes
 }
 
-if sel != false {
-if sel = oBrickSelect {
-
+switch sel {
+    
+    case oWallSelect:
+        block = oWall
+    ;break;
+    
+    case oWall2Select:
+        block = oWall2
+    ;break;
+    
+    case oPlayerSpawnPointSelect:
+        block = oPlayerSpawnPoint
+    ;break;
+    
+    case oSpikesSelect:
+        block = oSpikes
+    ;break;
+    
 }
 
+
+
+
+
+
+
+//turn off autotileing
+if (sel != false) or (!mouse_check_button(mb_left) and !mouse_check_button(mb_left)) {
+    //global.tile = false
+    with (oSolid) { tile = false }
 }
+
+if sel != false and canplace{
+    if mouse_check_button(mb_left) { 
+        with (oSolid) { if distance_to_point(mouse_x,mouse_y) &lt; 24 { tile = true } }
+        if !place_meeting(GridSnap(mouse_x,8),GridSnap(mouse_y,8),oSolid) {
+            instance_create(GridSnap(mouse_x,8),GridSnap(mouse_y,8),block)
+        }   
+    }
+    if mouse_check_button(mb_right) {
+        with (oSolid) { if distance_to_point(mouse_x,mouse_y) &lt; 24 { tile = true } }   
+        //block to delete
+        killme = instance_place(GridSnap(mouse_x,8),GridSnap(mouse_y,8),oSolid)
+        
+        if instance_exists(killme) {
+            with(killme) { instance_destroy() }
+        }
+        
+    }
+    
+}
+
+if keyboard_check_pressed(vk_escape) { sel = false }
 </string>
           </argument>
         </arguments>
@@ -91,41 +162,61 @@ if sel = oBrickSelect {
 ypos   = view_yview[0]
 xlen   = view_wview[0]
 ylen   = view_hview[0]
-mousex = mouse_x - view_xview[0] //USED FOR
-mousey = mouse_y - view_yview[0] //        DRAWING
-if global.debug {
-draw_set_colour(c_green);
-    draw_rectangle(xpos,ypos,xpos+xlen-1,ypos+ylen-1,true)
-}
 
 //draw the backround for the editor
-draw_set_colour(c_dkgray);
-draw_set_alpha(0.85);
-draw_rectangle(xpos,ypos,xpos+64,ypos+ylen-1,false)
-draw_set_alpha(1);
+    draw_set_colour(c_dkgray);
+    draw_set_alpha(0.85);
+    draw_rectangle(xpos,ypos,xpos+64,ypos+ylen-1,false)
+    draw_set_alpha(1);
+
 //title
-draw_set_font(Font0)
-draw_set_halign( fa_center )
-draw_text_outlined(xpos + 32,ypos,"Block Pallet",c_white,c_black)
-if col1 {
-    draw_sprite_ext(sBrickTile ,0,xpos+16,ypos+25,2.25,2.25,0,c_white,1)
-} else {
-    draw_sprite_ext(sBrickTile ,0,xpos+16,ypos+25,2,2,0,c_white,1)
-}
-//draw_sprite_ext(sSlideyWall,0,xpos+48,ypos+25,2,2,0,c_white,1)
-if sel = oBrickSelect {
+    draw_set_font(Font0)
+    draw_set_halign( fa_center )
+    draw_text_outlined(xpos + 32,ypos,"Block Pallet",c_white,c_black)
+//if i'm hovering over the first block make it react :finebro:
+    if col1 {
+        draw_sprite_ext(sBrickTile ,0,xpos+16,ypos+25,2.25,2.25,0,c_white,1)
+    } else {
+        draw_sprite_ext(sBrickTile ,0,xpos+16,ypos+25,2,2,0,c_white,1)
+    }
+//if i'm hovering over the second block make it react :finebro:
+    if col2 {
+        draw_sprite_ext(sSlideyWall ,0,xpos+48,ypos+25,2.25,2.25,0,c_white,1)
+    } else {
+        draw_sprite_ext(sSlideyWall ,0,xpos+48,ypos+25,2,2,0,c_white,1)
+    }
+//if i'm hovering over the spawn point placer make it react :finebro:
+    if SpawnPointcol {
+        draw_sprite_ext(spr_player_idle ,0,xpos+16,ypos+64,2.25,2.25,0,c_white,1)
+    } else {
+        draw_sprite_ext(spr_player_idle ,0,xpos+16,ypos+64,2,2,0,c_white,1)
+    }
+//if i'm hovering over the spike block make it react :finebro:
+    if col3 {
+        //draw_sprite_ext(sSpikesEditor ,0,xpos+oSpikesSelect.x,ypos+oSpikesSelect.x,2.25,2.25,0,c_white,1)
+        draw_sprite_ext(sSpikesEditor ,0,xpos+48,ypos+25+32,2.25,2.25,0,c_white,1)
+    } else {
+        draw_sprite_ext(sSpikesEditor ,0,xpos+48,ypos+25+32,2,2,0,c_white,1)
+    }    
+    
+    
+    
+//SpawnPointcol = false
+if sel = oWallSelect {
     draw_sprite(sWallTile,0,GridSnap(mouse_x,8),GridSnap(mouse_y,8))
 }
-if mouse_check_button_pressed(mb_right) { sel = false }
-
-if mouse_check_button(mb_left) and sel != false {
-    global.tile = true    
-
-    if !place_meeting(GridSnap(mouse_x,8),GridSnap(mouse_y,8),oSolid) {
-        instance_create(GridSnap(mouse_x,8),GridSnap(mouse_y,8),oWall2)
-    }
-    
+if sel = oWall2Select {
+    draw_sprite(sSlideyWallBase,0,GridSnap(mouse_x,8),GridSnap(mouse_y,8))
+    draw_sprite(sOutline1,0,GridSnap(mouse_x,8),GridSnap(mouse_y,8))
 }
+if sel = oSpikesSelect {
+    draw_sprite(sSpikes,0,GridSnap(mouse_x,8),GridSnap(mouse_y,8))
+    //draw_sprite(sOutline1,0,GridSnap(mouse_x,8),GridSnap(mouse_y,8))
+}
+
+
+
+
 
 
 

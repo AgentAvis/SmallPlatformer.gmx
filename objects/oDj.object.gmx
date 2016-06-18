@@ -29,7 +29,7 @@
 global.debug = false
 Sw = true
 global.Controls = true
-
+tilerr = 0 //used to turn off autotileing to save on performance
 //tweakables
 
 globalvar purple;
@@ -54,7 +54,11 @@ surf = surface_create(room_width,room_height)
 global.tile = false//true
 
 //if random(room_speed) &lt; 1 { global.tile = true }
-global.tile = true
+//global.tile = true
+
+
+rmcheck = 0 //counts down time to check if the room changed
+oroom = room //last room we were in
 </string>
           </argument>
         </arguments>
@@ -101,7 +105,7 @@ global.tile = true
             <kind>1</kind>
             <string>if room = rInit { room_goto_next() }
 
-if keyboard_check_pressed(ord('R')) { room_restart() ScClear() Sw = true }
+if keyboard_check_pressed(ord('R')) and room != rEditor { room_restart() ScClear() Sw = true }
  
 if keyboard_check_pressed(ord('K')) { global.debug = !global.debug }
 
@@ -110,14 +114,31 @@ if keyboard_check_pressed(ord('P')) { if room_exists(room_next(room)) {ScClear()
 if keyboard_check_pressed(ord('O')) { if room_exists(room_previous(room)) {ScClear() room_goto_previous()} Sw = true }
 
 if keyboard_check_pressed(ord('C')) {
-
-//tileing
-
-surface_set_target(surf);
-draw_clear_alpha(c_white,0);
-surface_reset_target();   
-
+    surface_set_target(surf);
+    draw_clear_alpha(c_white,0);
+    surface_reset_target();   
 }
+//tileing
+rmcheck ++;
+if rmcheck &gt;= 16 {
+oroom = room
+rmcheck = 0
+}
+if oroom != room {
+    //if running { crash = true }
+    global.tile = true
+} else {
+    //if running { crash = true }
+    if random(60) &lt; 1 { global.tile = false }
+}
+
+//if global.tile {
+//tilerr++;
+//if tilerr &gt; 5 { global.tile = false tilerr = 0 } 
+//}
+//global.tile = false
+
+
 
 
 if keyboard_check_pressed(ord('U')) { global.time = get_integer("Set timescale(TIME-SLOWING IS CURRENTLY BROKEN) ",1) }

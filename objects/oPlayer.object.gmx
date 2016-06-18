@@ -294,18 +294,6 @@ if HP &lt;= 0 {
     instance_destroy()
 }
 
-if mouse_check_button_pressed( mb_right ) {
-    
-    with (instance_create(x,y,oHook)) {
-    
-    //grapple stuff
-    
-    
-    
-    
-    }
-    
-}
 </string>
           </argument>
         </arguments>

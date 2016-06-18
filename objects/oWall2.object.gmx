@@ -37,7 +37,8 @@ if image_yscale != 1 {
        instance_create(x,y+(8*i),object_index)
     }
 }
-
+//init
+tile = false //do i try to autotile?
 image_xscale = 1
 image_yscale = 1
 </string>
@@ -62,7 +63,7 @@ image_yscale = 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if global.tile {    
+            <string>if tile or global.tile{    
     var count = 0;
     var d = 8;
     nUp = place_meeting(x,y-d,object_index);

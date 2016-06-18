@@ -64,8 +64,13 @@
     <sprite>sprites\sOutline1</sprite>
     <sprite>sprites\sOutline2</sprite>
     <sprite>sprites\sOutline3</sprite>
-    <sprite>sprites\sBrickTile</sprite>
-    <sprite>sprites\sSlideyWall</sprite>
+    <sprites name="Editor sprites">
+      <sprite>sprites\sSpikesEditor</sprite>
+      <sprite>sprites\sBrickTile</sprite>
+      <sprite>sprites\sSlideyWall</sprite>
+      <sprite>sprites\sTileBackroundEditor</sprite>
+      <sprite>sprites\sPlayerSpawnPointArrow</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_world_1</background>
@@ -103,8 +108,13 @@
   </fonts>
   <objects name="objects">
     <objects name="Editor">
+      <object>objects\oPlayerSpawnPoint</object>
       <object>objects\oEditor</object>
-      <object>objects\oBrickSelect</object>
+      <object>objects\oPlayerSpawnPointSelect</object>
+      <object>objects\oWallSelect</object>
+      <object>objects\oWall2Select</object>
+      <object>objects\oSpikesSelect</object>
+      <object>objects\oTileBackround</object>
     </objects>
     <object>objects\oPlayer</object>
     <object>objects\oClone</object>
@@ -138,11 +148,9 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>
-    <room>rooms\rMenu</room>
     <room>rooms\rEditor</room>
+    <room>rooms\rMenu</room>
     <room>rooms\rTest</room>
-    <room>rooms\rTestBackround</room>
-    <room>rooms\rTest2</room>
     <room>rooms\rTEMPtemplate</room>
     <room>rooms\rChooseSave</room>
   </rooms>

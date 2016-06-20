@@ -19,8 +19,8 @@
   </sounds>
   <sprites name="sprites">
     <sprites name="Player">
-      <sprite>sprites\spr_player_run</sprite>
       <sprite>sprites\spr_player_idle</sprite>
+      <sprite>sprites\spr_player_run</sprite>
       <sprite>sprites\spr_player_up</sprite>
       <sprite>sprites\spr_player_down</sprite>
       <sprite>sprites\sprPlayer_Mask</sprite>
@@ -60,6 +60,7 @@
     </sprites>
     <sprites name="UI">
       <sprite>sprites\sDeathText</sprite>
+      <sprite>sprites\sDialogBackdrop</sprite>
     </sprites>
     <sprite>sprites\sOutline1</sprite>
     <sprite>sprites\sOutline2</sprite>
@@ -105,6 +106,7 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\Font0</font>
+    <font>fonts\Font1</font>
   </fonts>
   <objects name="objects">
     <objects name="Editor">
@@ -148,11 +150,12 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>
-    <room>rooms\rEditor</room>
     <room>rooms\rMenu</room>
+    <room>rooms\rSettings</room>
     <room>rooms\rTest</room>
     <room>rooms\rTEMPtemplate</room>
     <room>rooms\rChooseSave</room>
+    <room>rooms\rEditor</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -27,10 +27,10 @@
             <kind>1</kind>
             <string>//tweakables
 with (oPlayer) { Speed = 2 JumpSpeed = 2.75 }
-global.Grav = .15
+global.Grav = .13
 HP = 2
 jumps = 20
-image_speed = 0.2
+image_speed = 0.15
 
 sprite_index2 = sNothing
 image_speed2 = .2

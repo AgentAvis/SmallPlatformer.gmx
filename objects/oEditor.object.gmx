@@ -112,20 +112,20 @@ switch sel {
 //turn off autotileing
 if (sel != false) or (!mouse_check_button(mb_left) and !mouse_check_button(mb_left)) {
     //global.tile = false
-    with (oSolid) { tile = false }
+    with (oBlock) { tile = false }
 }
 
 if sel != false and canplace{
     if mouse_check_button(mb_left) { 
-        with (oSolid) { if distance_to_point(mouse_x,mouse_y) &lt; 24 { tile = true } }
-        if !place_meeting(GridSnap(mouse_x,8),GridSnap(mouse_y,8),oSolid) {
+        with (oBlock) { if distance_to_point(mouse_x,mouse_y) &lt; 24 { tile = true } }
+        if !place_meeting(GridSnap(mouse_x,8),GridSnap(mouse_y,8),oBlock) {
             instance_create(GridSnap(mouse_x,8),GridSnap(mouse_y,8),block)
         }   
     }
     if mouse_check_button(mb_right) {
-        with (oSolid) { if distance_to_point(mouse_x,mouse_y) &lt; 24 { tile = true } }   
+        with (oBlock) { if distance_to_point(mouse_x,mouse_y) &lt; 24 { tile = true } }   
         //block to delete
-        killme = instance_place(GridSnap(mouse_x,8),GridSnap(mouse_y,8),oSolid)
+        killme = instance_place(GridSnap(mouse_x,8),GridSnap(mouse_y,8),oBlock)
         
         if instance_exists(killme) {
             with(killme) { instance_destroy() }

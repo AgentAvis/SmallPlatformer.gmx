@@ -110,13 +110,15 @@
   </fonts>
   <objects name="objects">
     <objects name="Editor">
-      <object>objects\oPlayerSpawnPoint</object>
       <object>objects\oEditor</object>
-      <object>objects\oPlayerSpawnPointSelect</object>
-      <object>objects\oWallSelect</object>
-      <object>objects\oWall2Select</object>
-      <object>objects\oSpikesSelect</object>
+      <object>objects\oPlayerSpawnPoint</object>
       <object>objects\oTileBackround</object>
+      <objects name="Buttons">
+        <object>objects\oSpikesSelect</object>
+        <object>objects\oWall2Select</object>
+        <object>objects\oWallSelect</object>
+        <object>objects\oPlayerSpawnPointSelect</object>
+      </objects>
     </objects>
     <object>objects\oPlayer</object>
     <object>objects\oClone</object>
@@ -134,6 +136,7 @@
       <object>objects\oSplats</object>
       <object>objects\oDj</object>
       <object>objects\oSolid</object>
+      <object>objects\oBlock</object>
     </objects>
     <objects name="Enemies">
       <object>objects\oStompable</object>

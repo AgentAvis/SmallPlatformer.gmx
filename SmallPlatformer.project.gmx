@@ -72,6 +72,7 @@
       <sprite>sprites\sTileBackroundEditor</sprite>
       <sprite>sprites\sPlayerSpawnPointArrow</sprite>
     </sprites>
+    <sprite>sprites\sSaveMask</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_world_1</background>
@@ -103,6 +104,10 @@
     <script>scripts\GridSnap.gml</script>
     <script>scripts\mouse_over.gml</script>
     <script>scripts\mouse_over_gui.gml</script>
+    <script>scripts\ScLoad.gml</script>
+    <script>scripts\object_index_cus.gml</script>
+    <script>scripts\ScSave.gml</script>
+    <script>scripts\instance_nth_nearest.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\Font0</font>
@@ -117,6 +122,8 @@
         <object>objects\oSpikesSelect</object>
         <object>objects\oWall2Select</object>
         <object>objects\oWallSelect</object>
+        <object>objects\oSaveButton</object>
+        <object>objects\oLoadButton</object>
         <object>objects\oPlayerSpawnPointSelect</object>
       </objects>
     </objects>
@@ -159,6 +166,7 @@
     <room>rooms\rTEMPtemplate</room>
     <room>rooms\rChooseSave</room>
     <room>rooms\rEditor</room>
+    <room>rooms\rLevelTest</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -102,6 +102,7 @@
     <background>background\bStars4</background>
     <background>background\bTile1</background>
     <background>background\bTile2</background>
+    <background>background\bTestScenery</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">

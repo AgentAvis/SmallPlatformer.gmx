@@ -1,29 +1,50 @@
+///object_index_cus(saving = -10/loading - input the index)
+var index;
 
-if object_index = oWall2 {
-    return 2;
-}
-if object_index = oSpikes {
-    return 3;
-}
-if object_index = oWall {
-    return 1;
-}
-if object_index = oWall {
-    return 1;
-}
-
-switch (object_index) {
-    case oWall:
-    return 1
-    ; break;
+if argument0 = -10 {
+    //we're saving the objects index to a file
+    switch (object_index) {
+        case oWall:
+        index = 1
+        ; break;
+        
+        case oWall2:
+        index = 2
+        ; break;
+        
+        case oSpikes:
+        index = 3
+        ; break;
+        
+        default:
+        show_error("The game tried to save unrecognised block.", true);
+        ; break;
+    }
     
-    case oWall2:
-    return 2
-    ; break;
+    return index;
     
-    case oSpikes:
-    return 3
-    ; break;
+} else {
+    //we're loading that index we made now
+    switch (argument0) {
+        case 1:
+        index = oWall//.object_index //asset_get_index
+        ; break;
+        
+        case 2:
+        index = oWall2//.object_index
+        ; break;
+        
+        case 3:
+        index = oSpikes//.object_index
+        ; break;
+        
+        default:
+        show_error("The game tried loading unreconised block.", true);
+        ; break;
+    
+    }
+    
+    return index;
+
 
 }
-

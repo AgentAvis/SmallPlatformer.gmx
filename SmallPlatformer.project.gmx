@@ -15,6 +15,10 @@
         <sound>sound\sPlayer_jump1</sound>
         <sound>sound\sPlayer_land1</sound>
       </sounds>
+      <sounds name="Other Entities">
+        <sound>sound\sSpikes_down</sound>
+        <sound>sound\sSpikes_up</sound>
+      </sounds>
     </sounds>
   </sounds>
   <sprites name="sprites">
@@ -32,22 +36,6 @@
         <sprite>sprites\spr_slime_idle</sprite>
       </sprites>
     </sprites>
-    <sprites name="World">
-      <sprite>sprites\sButton</sprite>
-      <sprite>sprites\sSpikes</sprite>
-      <sprite>sprites\sDoor</sprite>
-      <sprite>sprites\sWall</sprite>
-    </sprites>
-    <sprites name="Sprites you shouldnt be seeing">
-      <sprite>sprites\sSlimeBar</sprite>
-      <sprite>sprites\sBlood</sprite>
-    </sprites>
-    <sprite>sprites\sBlastDoor</sprite>
-    <sprite>sprites\sHook</sprite>
-    <sprite>sprites\sWallTile</sprite>
-    <sprite>sprites\sSlideyWallBase</sprite>
-    <sprite>sprites\sRefil</sprite>
-    <sprite>sprites\sNothing</sprite>
     <sprites name="Characters">
       <sprites name="Mentor">
         <sprite>sprites\sMentor_body</sprite>
@@ -58,13 +46,32 @@
         <sprite>sprites\sMentor_mouthBig</sprite>
       </sprites>
     </sprites>
+    <sprites name="World Objects">
+      <sprite>sprites\sButton</sprite>
+      <sprite>sprites\sSpikes</sprite>
+      <sprite>sprites\sDoor</sprite>
+      <sprite>sprites\sWall</sprite>
+      <sprite>sprites\sRefil</sprite>
+    </sprites>
+    <sprites name="Environment">
+      <sprite>sprites\sWallTile</sprite>
+      <sprite>sprites\sSlideyWallBase</sprite>
+      <sprite>sprites\sPurpleBlock_8x8</sprite>
+      <sprite>sprites\sPurpleBlock_16x16</sprite>
+      <sprite>sprites\sOutline1</sprite>
+      <sprite>sprites\sOutline2</sprite>
+      <sprite>sprites\sOutline3</sprite>
+      <sprites name="Scenery">
+        <sprite>sprites\sRuinsBG_1</sprite>
+        <sprite>sprites\sRuinsBG_2</sprite>
+        <sprite>sprites\sRuinsBG_3</sprite>
+      </sprites>
+    </sprites>
     <sprites name="UI">
       <sprite>sprites\sDeathText</sprite>
       <sprite>sprites\sDialogBackdrop</sprite>
+      <sprite>sprites\sSaveMask</sprite>
     </sprites>
-    <sprite>sprites\sOutline1</sprite>
-    <sprite>sprites\sOutline2</sprite>
-    <sprite>sprites\sOutline3</sprite>
     <sprites name="Editor sprites">
       <sprite>sprites\sSpikesEditor</sprite>
       <sprite>sprites\sBrickTile</sprite>
@@ -72,7 +79,15 @@
       <sprite>sprites\sTileBackroundEditor</sprite>
       <sprite>sprites\sPlayerSpawnPointArrow</sprite>
     </sprites>
-    <sprite>sprites\sSaveMask</sprite>
+    <sprites name="Sprites you shouldnt be seeing">
+      <sprite>sprites\sSlimeBar</sprite>
+      <sprite>sprites\sBlood</sprite>
+    </sprites>
+    <sprites name="Misc">
+      <sprite>sprites\sBlastDoor</sprite>
+      <sprite>sprites\sNothing</sprite>
+      <sprite>sprites\sHook</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_world_1</background>

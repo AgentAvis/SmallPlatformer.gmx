@@ -49,8 +49,6 @@ global.Grav = 0.15
 //BloodSurface
 surf = surface_create(room_width,room_height)
 
-//Just adding some test sound
-//audio_play_sound(sMusic_theme1, 1, true);
 global.tile = false//true
 
 //if random(room_speed) &lt; 1 { global.tile = true }
@@ -59,6 +57,13 @@ global.tile = false//true
 
 rmcheck = 0 //counts down time to check if the room changed
 oroom = room //last room we were in
+
+//Audio Related
+sVolume = 1;
+mVolume = 1;
+
+playFootsteps = true;
+//audio_play_sound(sMusic_theme1, 1, true);
 </string>
           </argument>
         </arguments>

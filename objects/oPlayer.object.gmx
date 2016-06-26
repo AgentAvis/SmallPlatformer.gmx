@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//tweakables
+            <string>///Player Variables
+//tweakables
 with (oPlayer) { Speed = 2 JumpSpeed = 2.75 }
 global.Grav = .13
 HP = 2
@@ -49,6 +50,8 @@ num = 0 //used for animating the SECOND drawn sprite
 
 //audio
 playLandSound = false;
+timeBetweenFootsteps = 14;
+footstepTimer = timeBetweenFootsteps;
 </string>
           </argument>
         </arguments>
@@ -294,6 +297,20 @@ if HP &lt;= 0 {
     instance_destroy()
 }
 
+//Audio Stuff
+if(oDj.playFootsteps == true &amp;&amp; sprite_index == spr_player_run)
+{
+    footstepTimer--;
+    if(footstepTimer &lt; 0)
+    {
+        footstepTimer = timeBetweenFootsteps;
+        audio_play_sound(sPlayer_footstep_1, 1, false);
+    }
+}
+else
+{
+    footstepTimer = 0;
+}
 </string>
           </argument>
         </arguments>

@@ -14,6 +14,8 @@
         <sound>sound\sPlayer_death1</sound>
         <sound>sound\sPlayer_jump1</sound>
         <sound>sound\sPlayer_land1</sound>
+        <sound>sound\sPlayer_footstep_1</sound>
+        <sound>sound\sPlayer_footstep_2</sound>
       </sounds>
       <sounds name="Other Entities">
         <sound>sound\sSpikes_down</sound>
@@ -71,6 +73,7 @@
       <sprite>sprites\sDeathText</sprite>
       <sprite>sprites\sDialogBackdrop</sprite>
       <sprite>sprites\sSaveMask</sprite>
+      <sprite>sprites\sSettingsBackdrop</sprite>
     </sprites>
     <sprites name="Editor sprites">
       <sprite>sprites\sSpikesEditor</sprite>

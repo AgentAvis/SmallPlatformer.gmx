@@ -31,7 +31,8 @@ with (oPlayer) { Speed = 2 JumpSpeed = 2.75 }
 global.Grav = .13
 HP = 2
 jumps = 20
-image_speed = 0.15
+imspeed = .15
+image_speed = imspeed * global.time
 
 sprite_index2 = sNothing
 image_speed2 = .2
@@ -76,8 +77,6 @@ footstepTimer = timeBetweenFootsteps;
             <kind>1</kind>
             <string>///this collision code works
 
-if keyboard_check(ord('V')) { y ++ }
-
 ScTime()
 
 //cheats
@@ -102,47 +101,48 @@ vomleft = keyboard_check(vk_left)
 vomright = keyboard_check(vk_right)
 vomdown = keyboard_check(vk_down)
 
-if (vomup or vomleft or vomright or vomdown) and percent &gt; 0 {
-    
-    percent -= .005;
-    
-    var cusdir;
-    if vomup    { cusdir = 90  }
-    if vomdown  { cusdir = 270 }
-    if vomright { cusdir = 0   }
-    if vomleft  { cusdir = 180 }
-    
-    //if mouse_check_button(mb_left) and App {
+if App {
+    if (vomup or vomleft or vomright or vomdown) and percent &gt; 0 {
         
-        //knockback yo
-        //motion_add_cus(global.Grav * .75,point_direction(x,y,mouse_x,mouse_y)+180)
-        motion_add_cus(global.Grav * .75,cusdir+180)
+        percent -= .005;
         
-        repeat(ceil(random_range(2,7))) {
-                with (instance_create(x,y,oBlood)) {
-                    dir = cusdir /*point_direction(x,y,mouse_x,mouse_y)*/ + random_range(-3,3)
-                    spd = random_range(4,6)
-                    hsp = lengthdir_x(spd,dir)
-                    vsp = lengthdir_y(spd,dir)
-                    
-                    //image_blend = make_colour_rgb(random_range(90,120),random_range(151,255),79) //181
-                    image_blend = make_colour_rgb(random_range(100,130),random_range(156,196),random_range(200,255)) //181
-                    //c = blue
-                    
-                    image_alpha = random_range(.6,1.5)
-                    if image_alpha &gt; 1 { image_alpha = 1 }
+        var cusdir;
+        if vomup    { cusdir = 90  }
+        if vomdown  { cusdir = 270 }
+        if vomright { cusdir = 0   }
+        if vomleft  { cusdir = 180 }
+        
+        //if mouse_check_button(mb_left) and App {
+            
+            //knockback yo
+            //motion_add_cus(global.Grav * .75,point_direction(x,y,mouse_x,mouse_y)+180)
+            motion_add_cus(global.Grav * .75,cusdir+180)
+            
+            repeat(ceil(random_range(2,7))) {
+                    with (instance_create(x,y,oBlood)) {
+                        dir = cusdir /*point_direction(x,y,mouse_x,mouse_y)*/ + random_range(-3,3)
+                        spd = random_range(4,6)
+                        hsp = lengthdir_x(spd,dir)
+                        vsp = lengthdir_y(spd,dir)
+                        
+                        //image_blend = make_colour_rgb(random_range(90,120),random_range(151,255),79) //181
+                        image_blend = make_colour_rgb(random_range(100,130),random_range(156,196),random_range(200,255)) //181
+                        //c = blue
+                        
+                        image_alpha = random_range(.6,1.5)
+                        if image_alpha &gt; 1 { image_alpha = 1 }
+                    }
                 }
-            }
+            
         
-    
-    //}
-    vtimerr = 0
-} else {
-    //kill spare vomit
-    vtimerr ++;
-    if vtimerr &gt; room_speed * 10 { with (oBlood) { instance_destroy() } vtimerr = 0 }
+        //}
+        vtimerr = 0
+    } else {
+        //kill spare vomit
+        vtimerr ++;
+        if vtimerr &gt; room_speed * 10 { with (oBlood) { instance_destroy() } vtimerr = 0 }
+    }
 }
-
 //autojump when you land on something
 Stomp = collision_rectangle(x-5,y+1,x+3,y+5,oStompable,true,true)
 if instance_exists(Stomp) and vsp &gt; 0
@@ -151,16 +151,16 @@ if instance_exists(Stomp) and vsp &gt; 0
     vsp = -JumpSpeed 
 }
 
-if App { //this makes sure everything works the same even if time is slowed
-    //Gravity yo
-    if place_meeting(x,y+2,0) { vsp = 0 } else { vsp += global.Grav }
-    
-    //Walking and shit
-    if !(right and left) {
-        if right { if hsp &lt; Speed { hsp += Speed * .2 } }
-        if left { if hsp &gt; -Speed { hsp -= Speed * .2 } }
-    }
-    
+//this makes sure everything works the same even if time is slowed
+   //Gravity yo
+   if place_meeting(x,y+2,0) { vsp = 0 } else { vsp += global.Grav * global.time }
+   
+   //Walking and shit
+   if !(right and left) {
+       if right { if hsp &lt; Speed { hsp += (Speed * .2) * global.time } }
+       if left { if hsp &gt; -Speed { hsp -= (Speed * .2) * global.time } }
+   }
+if App {    
     //drag
     if !left and !right {
         if place_meeting(x,y+2,oSolid) {
@@ -242,7 +242,7 @@ if (place_meeting(x+hsp, y, oSolid)) {
     if yplus &gt; 2 { hsp *= .75 }
     }
 }
-x += hsp //* global.time;
+x += hsp * global.time;
 
 if (place_meeting(x, y+vsp, oSolid)) {
     while (!place_meeting(x,y+sign(vsp),oSolid)){
@@ -256,9 +256,10 @@ if (place_meeting(x, y+vsp, oSolid)) {
         playLandSound = false;
     }
 }
-y += vsp //* global.time;
+y += vsp * global.time;
 
 //animation stuff
+image_speed = imspeed * global.time
 
 //point me the right direction!
 if sign(hsp) != 0 and (right or left) { image_xscale = sign(hsp) }
@@ -321,6 +322,7 @@ else
 {
     footstepTimer = 0;
 }
+
 </string>
           </argument>
         </arguments>
@@ -381,8 +383,8 @@ draw_rectangle(0,rmh,0+length,rmh-16,false)
 
 //draw the base sprite and animation (image_index, sprite_index,etc)
 //draw_sprite_ext(sprite_index,image_index,floor(x),floor(y),image_xscale,image_yscale,image_angle,image_blend,image_alpha)
-draw_sprite_ext(sprite_index,image_index,floor(x),floor(y),image_xscale,image_yscale,image_angle,image_blend,image_alpha)
-
+//draw_sprite_ext(sprite_index,image_index,floor(x),floor(y),image_xscale,image_yscale,image_angle,image_blend,image_alpha)
+draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 
 if global.debug {
 

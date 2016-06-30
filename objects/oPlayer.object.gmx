@@ -76,6 +76,8 @@ footstepTimer = timeBetweenFootsteps;
             <kind>1</kind>
             <string>///this collision code works
 
+if keyboard_check(ord('V')) { y ++ }
+
 ScTime()
 
 //cheats
@@ -218,14 +220,30 @@ if abs(vsp) &gt; 6 { vsp = sign(vsp) * 6 }
 
     // Collisions
 //Horizontal collisions
-if (place_meeting(x+hsp, y, oSolid)) {
-    while (!place_meeting(x+sign(hsp),y,oSolid)){
-        x += sign(hsp);
+if (vsp == 0) // "Stick" player to ground on shallow downward slopes
+{
+    yplus = 0;
+    while (!place_meeting(x,y+yplus+1,oSolid) &amp;&amp; yplus &lt;= abs(.5*hsp)) yplus +=1;
+    if place_meeting(x,y+yplus+1,oSolid)
+    {
+        y += yplus;
     }
-    hsp = 0;
 }
-x += hsp * global.time;
-//vertical collisions
+if (place_meeting(x+hsp, y, oSolid)) {
+    
+    yplus = 0;
+    while (place_meeting(x+hsp,y-yplus,oSolid) and yplus &lt;= abs(1 * hsp)) { yplus ++ }
+    if place_meeting(x+hsp,y-yplus,oSolid) {  
+        
+        while (!place_meeting(x+sign(hsp),y,oSolid)){ x += sign(hsp);}
+        hsp = 0;
+    } else {
+    y-= yplus;
+    if yplus &gt; 2 { hsp *= .75 }
+    }
+}
+x += hsp //* global.time;
+
 if (place_meeting(x, y+vsp, oSolid)) {
     while (!place_meeting(x,y+sign(vsp),oSolid)){
         y += sign(vsp);
@@ -234,19 +252,11 @@ if (place_meeting(x, y+vsp, oSolid)) {
     vsp = 0;
     if(playLandSound)
     {
-        audio_play_sound(sPlayer_land1, 1, false);
+        //audio_play_sound(sPlayer_land1, 1, false); //ground landing sound [ben]
         playLandSound = false;
     }
 }
-y += vsp * global.time;
-
-        
-    //Apply speeds and such
-//    
-//    x += hsp * global.time
-//    y += vsp * global.time
-
-    
+y += vsp //* global.time;
 
 //animation stuff
 

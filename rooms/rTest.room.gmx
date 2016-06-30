@@ -3,8 +3,8 @@
   <caption></caption>
   <width>1100</width>
   <height>450</height>
-  <vsnap>16</vsnap>
-  <hsnap>16</hsnap>
+  <vsnap>8</vsnap>
+  <hsnap>8</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
@@ -26,9 +26,9 @@
     <showViews>0</showViews>
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>-1</deleteUnderlyingTiles>
-    <page>1</page>
-    <xoffset>-126</xoffset>
-    <yoffset>-190</yoffset>
+    <page>0</page>
+    <xoffset>-127</xoffset>
+    <yoffset>-174</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="-1" foreground="0" name="bStars4" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -313,7 +313,7 @@
     <instance objName="oSpikes" x="704" y="320" name="inst_ADFB3F49" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="90"/>
     <instance objName="oSpikes" x="96" y="136" name="inst_011B9D8F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oWall2" x="104" y="144" name="inst_E212D081" locked="0" code="" scaleX="1" scaleY="10" colour="4294967295" rotation="0"/>
-    <instance objName="oWall2" x="408" y="232" name="inst_47442752" locked="0" code="" scaleX="1" scaleY="12" colour="4294967295" rotation="0"/>
+    <instance objName="oWall2" x="400" y="232" name="inst_47442752" locked="0" code="" scaleX="1" scaleY="12" colour="4294967295" rotation="0"/>
     <instance objName="oSpikes" x="104" y="136" name="inst_3D2EB3EC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oWall2" x="712" y="8" name="inst_90D22389" locked="0" code="" scaleX="1" scaleY="15" colour="4294967295" rotation="0"/>
     <instance objName="oWall2" x="680" y="160" name="inst_BEF41E05" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -340,6 +340,19 @@
     <instance objName="oWall" x="88" y="304" name="inst_560F9860" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oWall" x="96" y="304" name="inst_610E3B59" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oDoor" x="52" y="324" name="inst_860CE45E" locked="0" code="d = rMenu&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oWall" x="400" y="224" name="inst_D8BF0A08" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oWall" x="408" y="320" name="inst_06028465" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="240" name="inst_13506502" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="248" name="inst_CC254C20" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="256" name="inst_FF9ACFB2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="264" name="inst_D8EA22DA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="272" name="inst_B6204BB7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="280" name="inst_F9FE3659" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="288" name="inst_4E9AAE17" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="296" name="inst_C0B50A52" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="304" name="inst_1188DA47" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="312" name="inst_29A3EDC0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oSpikes" x="408" y="232" name="inst_8E8EB18C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bTile1" x="704" y="304" w="16" h="16" xo="0" yo="0" id="10000548" name="inst_061A2664" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

@@ -64,6 +64,7 @@ mVolume = 1;
 
 playFootsteps = true;
 //audio_play_sound(sMusic_theme1, 1, true);
+
 </string>
           </argument>
         </arguments>
@@ -235,6 +236,8 @@ var m = .25;
 
 }
 
+view_hport[0] = 240
+view_wport[0] = 360
 </string>
           </argument>
         </arguments>

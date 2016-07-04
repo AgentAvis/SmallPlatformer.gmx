@@ -16,7 +16,7 @@
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>-1</isSet>
-    <w>1016</w>
+    <w>1000</w>
     <h>600</h>
     <showGrid>0</showGrid>
     <showObjects>-1</showObjects>
@@ -26,7 +26,7 @@
     <showViews>0</showViews>
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>-1</deleteUnderlyingTiles>
-    <page>3</page>
+    <page>4</page>
     <xoffset>140</xoffset>
     <yoffset>191</yoffset>
   </makerSettings>
@@ -206,6 +206,7 @@
     <instance objName="oWall" x="352" y="0" name="inst_16CCE3A8" locked="0" code="" scaleX="1" scaleY="29" colour="4294967295" rotation="0"/>
     <instance objName="oWall" x="0" y="0" name="inst_A09DDC19" locked="0" code="" scaleX="45" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oWall2" x="272" y="96" name="inst_5B8FA372" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oEditor" x="336" y="312" name="inst_86601081" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

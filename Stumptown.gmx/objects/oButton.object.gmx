@@ -53,13 +53,13 @@ image_index += 1
             <kind>1</kind>
             <string>//d = false image_speed = 0 state = false
 
-if place_meeting(x,y,oPlayer) and keyboard_check_pressed(ord('E')) {
-
-state = !state
-image_index += 1
-
-if instance_exists(d) { with (d) { state = !state } }
-
+if place_meeting(x,y,oPlayer) and keyboard_check_pressed(ord('E')) {   
+    state = !state
+    image_index += 1  
+    change = true  
+    if instance_exists(d) { with (d) { state = !state } }
+} else {
+    change = false
 }
 </string>
           </argument>

@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>//particles surface
 party = surface_create(room_width,room_height)
+
+//Fade = part_system_create();
 </string>
           </argument>
         </arguments>
@@ -51,6 +53,14 @@ party = surface_create(room_width,room_height)
             <kind>1</kind>
             <string>// Draw blood surface
 
+
+if oDj.newroom {
+    if surface_exists(party) {
+        surface_free(party)
+    }
+}
+
+
 if (surface_exists(party))
 {
  
@@ -70,6 +80,8 @@ else
     party = surface_create(room_width, room_height);
     
 }
+
+
 </string>
           </argument>
         </arguments>

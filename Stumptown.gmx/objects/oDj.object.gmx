@@ -30,6 +30,8 @@ global.debug = false
 Sw = true
 global.Controls = true
 tilerr = 0 //used to turn off autotileing to save on performance
+newroom = false
+
 //tweakables
 
 globalvar purple;
@@ -90,7 +92,7 @@ playFootsteps = false;
             <kind>1</kind>
             <string>if room = rInit { room_goto_next() }
 
-if keyboard_check_pressed(ord('R')) and room != rEditor { room_restart() ScClear() Sw = true }
+if keyboard_check_pressed(ord('R')) and room != rEditor { room_restart() ScClear() Sw = true newroom = true global.tile = true }
  
 if keyboard_check_pressed(ord('K')) { global.debug = !global.debug }
 
@@ -115,9 +117,11 @@ rmcheck = 0
 if oroom != room {
     //if running { crash = true }
     global.tile = true
+    newroom = true
 } else {
     //if running { crash = true }
-    if random(60) &lt; 1 { global.tile = false }
+    if random(60) &lt; 1 { global.tile = false  }
+    newroom = false
 }
 
 if keyboard_check_pressed(ord('U')) { global.time = get_integer("Set timescale(TIME-SLOWING IS CURRENTLY BROKEN) ",1) }

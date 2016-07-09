@@ -60,68 +60,78 @@ create = false
     create = true
 }
 
-app += global.time 
-if app &gt;= 1 { App = true app = 0 } else { App = false }
-
-if App {vsp += .15}
-
-Col = collision_line(x,y,x-hsp,y-vsp,oSolid,false,true)//instance_place(x+hsp,y+vsp,oSolid)
-
-if instance_exists(Col) {
-
+    if !die {
+    app += global.time 
+    if app &gt;= 1 { App = true app = 0 } else { App = false }
     
-    if c = blue {
-    if get_speed() &lt; .5 { die = true }
-    move_bounce_cus()
-    if random(2) &lt; 1 { die = false } else {
-        motion_set_cus(get_speed() * random_range(.2,.9)  ,get_direction() + random_range(-4,4) )
-    }
-    } else {
-    switch (Col.object_index) {
-        case oBlastDoor:
-            var spd, dir; 
-            image_alpha = image_alpha / 2
-            s = true dir = get_direction()
-            spd = get_speed()
-            motion_set(dir + 180 + random_range(-20,20),spd)
-        ;break;
-        default:
-            if !s and random(2) &gt; 1 {
-                s = true
-                vsp = -vsp
-                vsp = vsp * .75
-                hsp += random_range(-5,5)
-            } else { 
-                image_alpha = 1 hsp = 0 vsp = 0 die = true
+    if App {vsp += .15}
+    
+    Col = collision_line(x,y,x-hsp,y-vsp,oSolid,false,true)//instance_place(x+hsp,y+vsp,oSolid)
+    
+    if instance_exists(Col) {
+    
+        
+        if c = blue {
+        if get_speed() &lt; .5 { die = true }
+        move_bounce_cus()
+        if random(2) &lt; 1 { die = false } else {
+            motion_set_cus(get_speed() * random_range(.2,.9)  ,get_direction() + random_range(-4,4) )
+        }
+        } else {
+        switch (Col.object_index) {
+            case oBlastDoor:
+                var spd, dir; 
+                image_alpha = image_alpha / 2
+                s = true dir = get_direction()
+                spd = get_speed()
+                motion_set(dir + 180 + random_range(-20,20),spd)
+            ;break;
+            default:
+                if !s and random(2) &gt; 1 {
+                    s = true
+                    vsp = -vsp
+                    vsp = vsp * .75
+                    hsp += random_range(-5,5)
+                } else { 
+                    image_alpha = 1 hsp = 0 vsp = 0 die = true
+                }
+            ;
             }
-        ;
         }
     }
-}
-if s and App { if random(10) &lt;= 4 { image_alpha = image_alpha * .6 hsp = 0 vsp = 0 die = true } }
-
-
-
-x += hsp * global.time
-y += vsp * global.time
-
-if die {
+    if s and App { if random(10) &lt;= 4 { image_alpha = image_alpha * .6 hsp = 0 vsp = 0 die = true } }
+    
+    
+    
+    x += hsp * global.time
+    y += vsp * global.time
+    
+    
+    
+} else {
+    hsp = 0
+    vsp = 0
+    image_alpha *= .95
+    if image_alpha &lt; .01 { instance_destroy() }
+    /*
     if (instance_exists(oDj)) {
         surface_set_target(oDj.surf);
         draw_set_alpha(image_alpha);
         draw_set_colour(image_blend);
-        draw_circle(x - 1,y - 1,1.5,false)
+        draw_rectangle(x-1.5*g,y-1.5*g,x+1.5*g,y+1.5*g,false)//draw_circle(x - 1,y - 1,1.5*4,false)//draw_circle(x - 1,y - 1,1.5*4,false)
         draw_set_alpha(1);
         surface_reset_target(); 
     }
-    instance_destroy()              
+    instance_destroy()           
+    */
 }
 
+/*
 //drawing
 surface_set_target(oSplats.party);
 draw_set_alpha(image_alpha);
 draw_set_colour(image_blend);
-draw_circle(x - 1,y - 1,1.5,false)
+draw_circle(x - 1,y - 1,1.5*4,false)
 draw_set_alpha(1);
 surface_reset_target(); 
 </string>
@@ -151,8 +161,12 @@ draw_set_color(image_blend);
 
 //draw_circle(x - 1,y - 1,1.5,false)
 
+draw_set_alpha(image_alpha);
+draw_set_colour(image_blend);
+draw_rectangle(x-1.5*g,y-1.5*g,x+1.5*g,y+1.5*g,false)//draw_circle(x - 1,y - 1,1.5*4,false)
+draw_set_alpha(1);
 
-//draw_self()
+draw_self()
 
 draw_set_alpha(1)
 

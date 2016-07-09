@@ -3,6 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="1" name="datafiles"/>
   <NewExtensions/>
   <sounds name="sound">
     <sounds name="Player">
@@ -13,14 +14,15 @@
       <sound>sound\aPlayerLand1</sound>
     </sounds>
     <sounds name="Machines">
-      <sound>sound\sSpikes_up</sound>
-      <sound>sound\sSpikes_down</sound>
+      <sound>sound\aSpikesUp</sound>
+      <sound>sound\aSpikesDown</sound>
     </sounds>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\sSaveMask</sprite>
     <sprites name="sPlayer">
       <sprite>sprites\sPlayerIdle</sprite>
+      <sprite>sprites\sPlayerScaled</sprite>
       <sprite>sprites\sPlayerUp</sprite>
       <sprite>sprites\sPlayerRun</sprite>
       <sprite>sprites\sPlayerDown</sprite>
@@ -80,7 +82,9 @@
       <background>background\bStars2</background>
       <background>background\bStars3</background>
       <background>background\bStars4</background>
+      <background>background\background5</background>
     </backgrounds>
+    <background>background\bTile2</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -105,7 +109,7 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\Font0</font>
-    <font>fonts\Font1</font>
+    <font>fonts\cal</font>
   </fonts>
   <objects name="objects">
     <objects name="LevelRelated">
@@ -142,6 +146,7 @@
   <rooms name="rooms">
     <room>rooms\rInit</room>
     <room>rooms\rMenu</room>
+    <room>rooms\rTest</room>
     <room>rooms\rEditor</room>
   </rooms>
   <help>

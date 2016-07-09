@@ -28,6 +28,9 @@
             <string>d = false    //destination
 s = false    //string
 a = true     //can this door be opened
+
+
+p = merge_colour(purple,c_purple,random(.25))
 </string>
           </argument>
         </arguments>
@@ -81,17 +84,20 @@ a = true     //can this door be opened
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if s != false {
+            <string>
+
+
+if s != false {
 
 draw_set_font(Font0)
 draw_set_halign(fa_center)
 if !a {
-    draw_text_outlined(x,y-24,s,merge_colour(purple,c_black,.5),c_black)
+    draw_text_outlined(x,y-24*4,s,merge_colour(p,c_black,.5),c_black)
     } else {
         if !place_meeting(x,y,oPlayer) {
-            draw_text_outlined(x,y-24,s,purple,c_black)
+            draw_text_outlined(x,y-24*4,s,p,c_black)
         } else {
-            draw_text_outlined(x,y-24,s,purple,c_white)
+            draw_text_outlined(x,y-24*4,s,p,c_white)
         }
     }
 }

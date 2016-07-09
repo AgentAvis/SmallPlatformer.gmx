@@ -3,9 +3,9 @@
   <spriteName>sBlastDoor</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>1</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>oSolid</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -50,21 +50,23 @@ oy = y
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(p) { state = p.state }
+            <string>if instance_exists(p) {
+if p.change = true { state = !state }
+}
 
 if state = true {
 
-if x &gt; ox { x -= 1 } if x &lt; ox { x += 1 }
-if y &gt; oy { y -= 1 } if y &lt; oy { y += 1 } 
+if x &gt; ox { x -= 1 * image_yscale } if x &lt; ox { x += 1 * image_yscale}
+if y &gt; oy { y -= 1 * image_yscale} if y &lt; oy { y += 1 * image_yscale} 
 
 } else {
     
     var dx, dy;
-    dx = ox + lengthdir_x(8,image_angle+270)
-    dy = oy + lengthdir_y(8,image_angle+270)
+    dx = ox + lengthdir_x(8*4*image_yscale,image_angle+270)
+    dy = oy + lengthdir_y(8*4*image_yscale,image_angle+270)
     
-    if x &gt; dx { x -= 1 } if x &lt; dx { x += 1 }
-    if y &gt; dy { y -= 1 } if y &lt; dy { y += 1 } 
+    if x &gt; dx { x -= 1 * image_yscale } if x &lt; dx { x += 1 * image_yscale }
+    if y &gt; dy { y -= 1 * image_yscale } if y &lt; dy { y += 1 * image_yscale } 
     
 }
 </string>

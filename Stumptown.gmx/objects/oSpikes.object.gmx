@@ -29,6 +29,7 @@
 c = false //has my fake create event run yet?
 image_speed = 0
 tile = false
+cnum = 0
 </string>
           </argument>
         </arguments>
@@ -51,7 +52,12 @@ tile = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if tile or global.tile {
+            <string>if !c {
+truestate = state
+c = true
+}
+
+if tile or global.tile {
     //this is the tiling code
     image_index = 0
     t = false //touching
@@ -85,28 +91,58 @@ tile = false
 
 
 if instance_exists(p) {
-    if state != p.state {
+    if p.change = true { //if state != p.state {
         //state = p.state
-        s = true
+        truestate = !truestate
     }
 }
 
-if (s = true) and (random(room_speed/4) &lt; 1){
-    state = p.state
+if (state != truestate) and (random(room_speed/4) &lt; 1){
+    state = truestate
     if state = true { audio_play_sound(aSpikesUp,1,false) }
     if state = false { audio_play_sound(aSpikesDown,1,false) }
     s = false
 }
 
 if state = true {
-
-if y &gt; oy { y -= 1*4 }
-
+    if image_index = 0 {
+        if y &gt; oy { y -= 1*4 } //0 degree rot
+    }
 } else {
-if image_angle = 0
-if y &lt; oy + 6*4 { y += 1*4 }
-
+    if image_angle = 0 {
+        if y &lt; oy + 6*4 { y += 1*4 }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>

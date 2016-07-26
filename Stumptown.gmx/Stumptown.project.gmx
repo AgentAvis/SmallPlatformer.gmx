@@ -45,6 +45,7 @@
         <sprite>sprites\sSpikes</sprite>
       </sprites>
       <sprite>sprites\sRefil</sprite>
+      <sprite>sprites\sDoor2</sprite>
       <sprite>sprites\sDoor</sprite>
     </sprites>
     <sprites name="Environment">
@@ -75,6 +76,7 @@
       <sprite>sprites\sBlood</sprite>
       <sprite>sprites\sSlimeBar</sprite>
     </sprites>
+    <sprite>sprites\sGrass</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Space">
@@ -101,11 +103,14 @@
     <script>scripts\draw_text_outlined.gml</script>
     <script>scripts\get_direction.gml</script>
     <script>scripts\get_speed.gml</script>
+    <script>scripts\get_speed2.gml</script>
     <script>scripts\GridSnap.gml</script>
     <script>scripts\instance_nth_nearest.gml</script>
     <script>scripts\MachineCreate.gml</script>
     <script>scripts\motion_add_cus.gml</script>
     <script>scripts\draw_sprite_ext_simp.gml</script>
+    <script>scripts\get_BID.gml</script>
+    <script>scripts\draw_sprite_outlined.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\Font0</font>
@@ -134,14 +139,18 @@
       <object>objects\oBlood</object>
       <object>objects\oSolid</object>
       <object>objects\oBlock</object>
+      <object>objects\oEditor</object>
       <object>objects\oDj</object>
       <object>objects\oSlimeBar</object>
+      <object>objects\oLagJanitor</object>
     </objects>
     <objects name="UI">
       <object>objects\oDeathText</object>
       <object>objects\oDialog</object>
       <object>objects\oCam</object>
     </objects>
+    <object>objects\oDoor2</object>
+    <object>objects\oGrass</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>

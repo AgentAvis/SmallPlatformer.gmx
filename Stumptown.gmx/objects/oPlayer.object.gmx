@@ -100,10 +100,13 @@ vomleft = keyboard_check(vk_left)
 vomright = keyboard_check(vk_right)
 vomdown = keyboard_check(vk_down)
 
+if global.debug { percent = 1 }
+
+
 if App { //App basically says "if time was normal and the code would be running right now"
     if (vomup or vomleft or vomright or vomdown) and percent &gt; 0 {
         
-        percent -= .005;
+        percent -= .005/2;
         
         var cusdir;
         if vomright { cusdir = 0   }
@@ -116,12 +119,20 @@ if App { //App basically says "if time was normal and the code would be running 
         motion_add_cus(global.Grav * .75,cusdir+180)
         
         //spawn the vomit particles
-        repeat(ceil(random_range(2,5))) {
+        repeat(ceil((random_range(2,5)/2))) {
                 with (instance_create(x,y,oBlood)) {
+                //c = blue
                     var blspd, bldir;
                     bldir = cusdir + random_range(-4,4)
                     blspd = random_range(4,6)*3
                     motion_set_cus(blspd,bldir)
+                    //if vsp &lt; 0 {
+                        hsp += other.hsp * .5
+                    //} else {
+                        //hsp += other.hsp * .75
+                    //}
+                    vsp += other.vsp * .75
+                    
         //hsp = lengthdir_x(blspd,bldir)
         //vsp = lengthdir_y(blspd,bldir)
         //image_blend = make_colour_rgb(random_range(90,120),random_range(151,255),79) //181
@@ -353,6 +364,14 @@ draw_rectangle(0,rmh,rmw,rmh-16,false)
 length = percent * rmw
 draw_set_colour(c_green);
 draw_rectangle(0,rmh,0+length,rmh-16,false)
+*/
+if global.debug {
+    draw_set_colour(c_white);
+    draw_set_halign(fa_left)
+    draw_text(10,10,"Speed:"+string(get_speed()))
+    draw_text(10,40,"Direction:"+string(get_direction()))
+    //draw_text(10,40+30,"Direction:"+string(get_direction()))
+}
 </string>
           </argument>
         </arguments>

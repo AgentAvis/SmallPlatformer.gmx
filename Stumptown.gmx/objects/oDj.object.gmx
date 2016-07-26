@@ -31,6 +31,7 @@ Sw = true
 global.Controls = true
 tilerr = 0 //used to turn off autotileing to save on performance
 newroom = false
+global.camera = true
 
 //tweakables
 
@@ -96,6 +97,8 @@ if keyboard_check_pressed(ord('R')) and room != rEditor { room_restart() ScClear
  
 if keyboard_check_pressed(ord('K')) { global.debug = !global.debug }
 
+if keyboard_check_pressed(ord('C')) { global.camera = !global.camera }
+
 if keyboard_check_pressed(ord('P')) { if room_exists(room_next(room)) {ScClear() room_goto_next()} Sw = true }
 
 if keyboard_check_pressed(ord('O')) { if room_exists(room_previous(room)) {ScClear() room_goto_previous()} Sw = true }
@@ -128,29 +131,31 @@ if keyboard_check_pressed(ord('U')) { global.time = get_integer("Set timescale(T
 
 //camera stuff
 if room = rEditor {
-    view_xview[0] = floor(oCam.x - view_wview/2)
-    view_yview[0] = floor(oCam.y - view_hview/2)
+    view_xview[0] = oCam.x - view_wview[0]/2//floor(oCam.x - view_wview/2)
+    view_yview[0] = oCam.y - view_hview[0]/2//floor(oCam.y - view_hview/2)
 }
 if room != rMenu {
     if instance_exists(oPlayer) {
-        view_xview[0] = floor(oPlayer.x - view_wview/2)
-        view_yview[0] = floor(oPlayer.y - view_hview/2)
-        var s = 1; //s = movement scale
-    
-        //background_x[4] += oPlayer.hsp / (s)
-        //background_y[4] += oPlayer.vsp / (s)
+        if global.camera {
+            view_xview[0] = oPlayer.x - view_wview/2
+            view_yview[0] = oPlayer.y - view_hview/2
+            var s = 1; //s = movement scale
         
-        background_x[3] += oPlayer.hsp / (s*2) //smallest stars
-        background_y[3] += oPlayer.vsp / (s*2)
-        
-        background_x[2] += oPlayer.hsp / (s*4) //second biggest
-        background_y[2] += oPlayer.vsp / (s*4)
-        
-        background_x[1] += oPlayer.hsp / (s*48) //biggest stars
-        background_y[1] += oPlayer.vsp / (s*48)
-        
-        background_x[0] += oPlayer.hsp / (1) //backround
-        background_y[0] += oPlayer.vsp / (1)
+            //background_x[4] += oPlayer.hsp / (s)
+            //background_y[4] += oPlayer.vsp / (s)
+            
+            background_x[3] += oPlayer.hsp / (s*2) //smallest stars
+            background_y[3] += oPlayer.vsp / (s*2)
+            
+            background_x[2] += oPlayer.hsp / (s*4) //second biggest
+            background_y[2] += oPlayer.vsp / (s*4)
+            
+            background_x[1] += oPlayer.hsp / (s*48) //biggest stars
+            background_y[1] += oPlayer.vsp / (s*48)
+            
+            background_x[0] += oPlayer.hsp / (1) //backround
+            background_y[0] += oPlayer.vsp / (1)
+        }
     } else if instance_exists(oCam) {
     var s = 1; //s = movement scale
     
@@ -216,9 +221,9 @@ var m = .25;
             <string>///all game gui
 if instance_exists(oPlayer) {
     //draw the blank bar
-    rmh = view_hview[0] * 3.2
-    rmw = view_wview[0] * 3
-    if oPlayer.percent != 0 {
+    rmh = view_hview[0]// * 3.2
+    rmw = view_wview[0]// * 3
+    //if oPlayer.percent != 0 {
         draw_set_colour(c_black);
         draw_rectangle(0,rmh,rmw,rmh-16,false)
         //draw the fullness bar
@@ -226,7 +231,7 @@ if instance_exists(oPlayer) {
         length = oPlayer.percent * rmw
         draw_set_colour(c_green);
         draw_rectangle(0,rmh,0+length,rmh-16,false)
-    }  
+    //}  
 }
 </string>
           </argument>

@@ -31,6 +31,7 @@ app = 0
 s = false
 c = c_red
 create = false
+reallydie = false
 </string>
           </argument>
         </arguments>
@@ -53,13 +54,14 @@ create = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if !create {
+            <string>//note: for some ungodly reason you can't change direction. just change hsp and vsp. (also i think get_direction and get_speed are fucked up? idk)
+//i tried to figure it out for an hour and i'm giving up at this point.
+if !create {
     //mock create event
     x+= hsp
     y+= vsp
     create = true
 }
-
     if !die {
     app += global.time 
     if app &gt;= 1 { App = true app = 0 } else { App = false }
@@ -72,20 +74,20 @@ create = false
     
         
         if c = blue {
-        if get_speed() &lt; .5 { die = true }
+        if get_speed() &lt; .5 { die = true hsp = 0 }
         move_bounce_cus()
         if random(2) &lt; 1 { die = false } else {
             motion_set_cus(get_speed() * random_range(.2,.9)  ,get_direction() + random_range(-4,4) )
         }
         } else {
         switch (Col.object_index) {
-            case oBlastDoor:
-                var spd, dir; 
-                image_alpha = image_alpha / 2
-                s = true dir = get_direction()
-                spd = get_speed()
-                motion_set(dir + 180 + random_range(-20,20),spd)
-            ;break;
+            //case oBlastDoor:
+            //    var spd, dir; 
+            //    image_alpha = image_alpha / 2
+            //    s = true dir = get_direction()
+            //    spd = get_speed()
+            //    motion_set(dir + 180 + random_range(-20,20),spd)
+            //;break;
             default:
                 if !s and random(2) &gt; 1 {
                     s = true
@@ -93,26 +95,41 @@ create = false
                     vsp = vsp * .75
                     hsp += random_range(-5,5)
                 } else { 
-                    image_alpha = 1 hsp = 0 vsp = 0 die = true
+                    image_alpha = 1 hsp = 0 vsp = 0 die = true hsp = 0
                 }
             ;
             }
         }
     }
     if s and App { if random(10) &lt;= 4 { image_alpha = image_alpha * .6 hsp = 0 vsp = 0 die = true } }
-    
-    
-    
-    x += hsp * global.time
-    y += vsp * global.time
-    
-    
-    
+
 } else {
-    hsp = 0
-    vsp = 0
-    image_alpha *= .95
+    
+    vsp += .15 *global.time
+    //hsp *= .95
+    //vsp *= .95
+    image_alpha *= .98//.01
+    if reallydie { image_alpha *= .75 }
     if image_alpha &lt; .01 { instance_destroy() }
+    var dory, doorcol, stop;
+    stop = false
+    doorcol = false
+    dory = instance_place(x,y,oDoor2)
+    sol = place_meeting(x,y,oSolid)
+    if instance_exists(dory) { if dory.image_xscale = .1 {doorcol = true} }
+    
+    if doorcol { stop = true }
+    if sol {
+        if !place_meeting(x,y-10,oSolid) { stop = true }
+    }
+    if sol or doorcol { hsp = 0 vsp *= .5 }
+    
+    if stop { vsp = 0 }
+    
+    //if !doorcol {
+    //    image_xscale = .25
+    //   image_yscale = .25
+    //}
     /*
     if (instance_exists(oDj)) {
         surface_set_target(oDj.surf);
@@ -125,6 +142,9 @@ create = false
     instance_destroy()           
     */
 }
+
+x += hsp * global.time
+y += vsp * global.time
 
 /*
 //drawing
@@ -163,10 +183,27 @@ draw_set_color(image_blend);
 
 draw_set_alpha(image_alpha);
 draw_set_colour(image_blend);
-draw_rectangle(x-1.5*g,y-1.5*g,x+1.5*g,y+1.5*g,false)//draw_circle(x - 1,y - 1,1.5*4,false)
+//draw_rectangle(x-1.5*g,y-1.5*g,x+1.5*g,y+1.5*g,false)//draw_circle(x - 1,y - 1,1.5*4,false)
+draw_set_circle_precision(8);
+draw_circle(x - 1,y - 1,1.3*4,false)
+//draw_set_circle_precision(16);
 draw_set_alpha(1);
 
-draw_self()
+//if !global.debug { 
+    
+//} else {
+    h = hsp
+    //if abs(h) &lt; 4 { h = 4 * sign(hsp) }
+    v = vsp
+    //if abs(v) &lt; 4 { h = 4 * sign(vsp) }
+    if die { sc = 4 } else { sc = 2 }
+    
+    draw_set_alpha(image_alpha);  
+    draw_line_width(x,y,x-(h*.5)*sc,y-(v*.5)*sc,8)
+    draw_line_width(x,y,x-(h*.75)*sc,y-(v*.75)*sc,5)
+    draw_line_width(x,y,x-(h*1)*sc,y-(v*1)*sc,3)
+//}
+//draw_self()
 
 draw_set_alpha(1)
 

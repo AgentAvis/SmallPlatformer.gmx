@@ -26,6 +26,18 @@
           <argument>
             <kind>1</kind>
             <string>BID = 0
+ZM  = 1
+TAB = 1
+dviewx = view_wview[0]
+dviewy = view_hview[0]
+
+vieww  = view_wview[0]
+viewh  = view_hview[0]
+viewmx = view_wview[0]/2
+viewmy = view_hview[0]/2
+
+TAB1NUM = 3
+TAB2NUM = 4
 </string>
           </argument>
         </arguments>
@@ -50,49 +62,77 @@
             <kind>1</kind>
             <string>//find_BID()
 
-if mouse_wheel_up() or keyboard_check_pressed(ord('Q')) {
-BID ++;
+if keyboard_check_pressed(ord('E')) {
+    BID ++;
 }
-if mouse_wheel_down() or keyboard_check_pressed(ord('E'))  {
-BID --;
+if keyboard_check_pressed(ord('Q'))  {
+    BID --;
+}
+if mouse_wheel_up() {
+    ZM -= .12;
+}
+if mouse_wheel_down() {
+    ZM += .12;
+}
+if keyboard_check_pressed(ord('1')) {TAB = 1}
+if keyboard_check_pressed(ord('2')) {TAB = 2}
+
+switch TAB {
+case 1:
+    if BID &lt; 0 { BID += TAB1NUM }
+    if BID &gt; TAB1NUM { BID -= TAB1NUM }
+;break;
+case 2:
+    if BID &lt; 0 { BID += TAB2NUM }
+    if BID &gt; TAB2NUM { BID -= TAB2NUM }
+;break;
 }
 
-if BID &lt; 1 { BID = 6 }
-if BID &gt; 6 { BID = 1 }
 
-xpos = GridSnap(mouse_x,32)
-ypos = GridSnap(mouse_y,32)
 
-x = xpos
-y = ypos
+if ZM &lt; .25 { ZM = .25 }
+if ZM &gt; 4 { ZM = 4 }
+xpos = GridSnap(mouse_x,32);
+ypos = GridSnap(mouse_y,32);
+
+//x = xpos
+//y = ypos
+
 sel = false
 canplace = true
 
+//BLOCK = false
+BLOCK = ScFindBlock()
+
 //placeing of blocks!!
 //if sel != false and canplace{
-    if mouse_check_button(mb_left) { 
-        global.tile = true
-        with (oBlock) { if distance_to_point(other.xpos,other.ypos) &lt; 24*4 { tile = true } }
-        if !place_meeting(xpos,ypos,oBlock) {
-            with (instance_create(xpos,ypos,oWall2)) { tile = true }
-            //instance_create(mouse_x,mouse_y,oWall2)
-            audio_play_sound(aSpikesUp,1,false)
-        }   
-    }
-    
-    //removal of blocks!!
-    if mouse_check_button(mb_right) {
-        with (oBlock) { if distance_to_point(mouse_x,mouse_y) &lt; 24*4 { tile = true } }   
-        //block to delete
-        killme = instance_place(GridSnap(mouse_x,32),GridSnap(mouse_y,32),oBlock)
-        
-        if instance_exists(killme) {
-            with(killme) { instance_destroy() }
+if mouse_check_button(mb_left) { 
+    global.tile = true
+    with (oBlock) { if distance_to_point(other.xpos,other.ypos) &lt; 24*4 { tile = true } }
+    if !place_meeting(xpos,ypos,oBlock) {
+        if BLOCK != "Herpes" {
+            
+            with (instance_create(xpos,ypos,BLOCK)) { tile = true }
+            if global.debug { audio_play_sound(aSpikesUp,1,false)}
         }
+        //instance_create(mouse_x,mouse_y,oWall2)
         
+    }   
+}
+
+//removal of blocks!!
+if mouse_check_button(mb_right) {
+    with (oBlock) { if distance_to_point(mouse_x,mouse_y) &lt; 24*4 { tile = true } }   
+    //block to delete
+    killme = instance_place(GridSnap(mouse_x,32),GridSnap(mouse_y,32),oBlock)
+    if killme = noone { killme = instance_place(GridSnap(mouse_x,32),GridSnap(mouse_y,32),oGrass) }
+    
+    
+    if instance_exists(killme) {
+        with(killme) { instance_destroy() }
     }
     
-
+}
 </string>
           </argument>
         </arguments>
@@ -117,48 +157,96 @@ canplace = true
             <kind>1</kind>
             <string>//viewx  = view_xview[0]
 //viewy  = view_yview[0]
+/*
 vieww  = view_wview[0]
 viewh  = view_hview[0]
 viewmx = view_wview[0]/2
 viewmy = view_hview[0]/2
+*/
 
+//draw_sprite(sSelection,0,0,0)
 draw_set_halign(fa_left);
-draw_text(10,10,string(BID))
 
-draw_set_alpha(.5)
+icol = purple
+zerox = 10
+zeroy = -18
+
+switch TAB {
+case 1: 
+draw_set_halign(fa_center);
+draw_text_outlined(vieww*.15,zeroy,"BLOCKS",icol,c_white)
+
+draw_text_outlined(viewmx,zeroy,"MACHINES",icol,c_black)
+
+draw_text_outlined(vieww*.85,zeroy,"DECORATION",icol,c_black)
+;break;
+case 2: 
+draw_set_halign(fa_center);
+draw_text_outlined(vieww*.15,zeroy,"BLOCKS",icol,c_black)
+
+draw_text_outlined(viewmx,zeroy,"MACHINES",icol,c_white)
+
+draw_text_outlined(vieww*.85,zeroy,"DECORATION",icol,c_black)
+;break;
+case 3: 
+draw_set_halign(fa_center);
+draw_text_outlined(vieww*.15,zeroy,"BLOCKS",icol,c_black)
+
+draw_text_outlined(viewmx,zeroy,"MACHINES",icol,c_black)
+
+draw_text_outlined(vieww*.85,zeroy,"DECORATION",icol,c_white)
+;break;
+}
+
+
+
+
 if global.debug {
-    //draw_rectangle(0+32,0+32,vieww-32,viewh - 32,false)
+    draw_set_alpha(.04)
+    draw_rectangle(0+32,0+32,vieww-32,viewh - 32,false)
 }
 draw_set_alpha(1)
 
 draw_set_colour(c_black);
 //draw_rectangle(64,64,vieww-64,0,false);
 
-draw_sprite_outlined(get_BID(BID,0),0,(32+vieww-32)/2,(32/2)/2,1.5,1.5,0,c_white,c_white)
+yy = 32*5
 
-draw_sprite_ext(get_BID(BID,-1),0,(32+vieww-32)/2-64,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_outlined(get_BID(BID,0),0,(32+vieww-32)/2,(yy/2)/2,1.5,1.5,0,c_white,c_white)
 
-draw_sprite_ext(get_BID(BID,-2),0,(32+vieww-32)/2-64*2,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,-1),0,(32+vieww-32)/2-64,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,-3),0,(32+vieww-32)/2-64*3,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,-2),0,(32+vieww-32)/2-64*2,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,-4),0,(32+vieww-32)/2-64*4,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,-3),0,(32+vieww-32)/2-64*3,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,-5),0,(32+vieww-32)/2-64*5,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,-4),0,(32+vieww-32)/2-64*4,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,-6),0,(32+vieww-32)/2-64*6,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,-5),0,(32+vieww-32)/2-64*5,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,1),0,(32+vieww-32)/2+64,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,-6),0,(32+vieww-32)/2-64*6,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,2),0,(32+vieww-32)/2+64*2,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,-7),0,(32+vieww-32)/2-64*7,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,3),0,(32+vieww-32)/2+64*3,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,-8),0,(32+vieww-32)/2-64*8,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,4),0,(32+vieww-32)/2+64*4,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,1),0,(32+vieww-32)/2+64,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,5),0,(32+vieww-32)/2+64*5,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,2),0,(32+vieww-32)/2+64*2,(yy/2)/2,1.5,1.5,0,c_white,1)
 
-draw_sprite_ext(get_BID(BID,6),0,(32+vieww-32)/2+64*6,(32/2)/2,1.5,1.5,0,c_white,1)
+draw_sprite_ext(get_BID(BID,3),0,(32+vieww-32)/2+64*3,(yy/2)/2,1.5,1.5,0,c_white,1)
+
+draw_sprite_ext(get_BID(BID,4),0,(32+vieww-32)/2+64*4,(yy/2)/2,1.5,1.5,0,c_white,1)
+
+draw_sprite_ext(get_BID(BID,5),0,(32+vieww-32)/2+64*5,(yy/2)/2,1.5,1.5,0,c_white,1)
+
+draw_sprite_ext(get_BID(BID,6),0,(32+vieww-32)/2+64*6,(yy/2)/2,1.5,1.5,0,c_white,1)
+
+draw_sprite_ext(get_BID(BID,7),0,(32+vieww-32)/2+64*7,(yy/2)/2,1.5,1.5,0,c_white,1)
+
+draw_set_colour(c_white);
+draw_set_halign(fa_left);
+draw_text(10,10,string(BID))
 </string>
           </argument>
         </arguments>
@@ -185,6 +273,9 @@ draw_sprite_ext(get_BID(BID,6),0,(32+vieww-32)/2+64*6,(32/2)/2,1.5,1.5,0,c_white
 ypos = GridSnap(mouse_y,32)
 
 draw_sprite(get_BID(BID,0),0,xpos,ypos)
+
+view_wview[0] = dviewx * ZM
+view_hview[0] = dviewy * ZM
 </string>
           </argument>
         </arguments>

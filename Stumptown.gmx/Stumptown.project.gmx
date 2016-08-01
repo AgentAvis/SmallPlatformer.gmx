@@ -77,6 +77,8 @@
       <sprite>sprites\sSlimeBar</sprite>
     </sprites>
     <sprite>sprites\sGrass</sprite>
+    <sprite>sprites\sSelection</sprite>
+    <sprite>sprites\sPlayerSpawn</sprite>
   </sprites>
   <backgrounds name="background">
     <backgrounds name="Space">
@@ -111,6 +113,8 @@
     <script>scripts\draw_sprite_ext_simp.gml</script>
     <script>scripts\get_BID.gml</script>
     <script>scripts\draw_sprite_outlined.gml</script>
+    <script>scripts\cycle.gml</script>
+    <script>scripts\ScFindBlock.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\Font0</font>
@@ -138,6 +142,7 @@
       <object>objects\oSplats</object>
       <object>objects\oBlood</object>
       <object>objects\oSolid</object>
+      <object>objects\oPlayerSpawn</object>
       <object>objects\oBlock</object>
       <object>objects\oEditor</object>
       <object>objects\oDj</object>

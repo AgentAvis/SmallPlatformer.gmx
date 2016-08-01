@@ -59,6 +59,17 @@ hsp *= .5
 vsp *= .5
 
 var m = 2; //m = movementspeed
+if keyboard_check(vk_shift) {
+    m *= 6
+} else {
+    if keyboard_check(vk_control) { m *= 1 } else {
+        //default speed!!
+        m *=3
+    }
+}
+
+m *= oEditor.ZM
+
 
 if up {vsp = -m}
 if down {vsp = m}
